@@ -1,0 +1,16 @@
+<h1>Listing customers</h1>
+
+<table>
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+  </tr>
+
+  <% @customers.each do |customer| %>
+    <tr>
+      <td><%= customer.first_name %></td>
+      <td><%= customer.last_name %></td>
+      <td><%= link_to 'Show', customer_path(customer) %></td>
+    </tr>
+  <% end %>
+</table>
