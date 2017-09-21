@@ -5,13 +5,13 @@ one:
   last_name: MyString
   email: MyString
   password: MyString
-  date_of_birth: MyString
-  licence_number: MyString
+  date_of_birth: 2017-09-21
+  license_number: MyString
 
 two:
   first_name: MyString
   last_name: MyString
   email: MyString
   password: MyString
-  date_of_birth: MyString
-  licence_number: MyString
+  date_of_birth: 2017-09-21
+  license_number: MyString

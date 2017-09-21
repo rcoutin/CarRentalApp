@@ -17,12 +17,11 @@ class CustomersController < ApplicationController
       redirect_to @customer
     else
       render plain: params[:article].inspect
-      puts params
     end
   end
 
   private
   def customer_params
-    params.require(:customer).permit(:first_name, :last_name, :email, :password, :date_of_birth)
+    params.require(:customer).permit(:first_name, :last_name, :email, :password, :date_of_birth, :license_number)
   end
 end
