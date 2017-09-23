@@ -12,14 +12,10 @@ class CarController < ApplicationController
   end
 
   def create
-<<<<<<< HEAD
-  @car = Car.new(params.require(:car).permit(:manufacturer, :model, :license_number))
-=======
   @car = Car.new(car_params)
->>>>>>> fb47917380abf6f2aa9b3be7a285fc7dc8133cb5
 
     if @car.save
-      redirect @car
+      redirect_to @car
     else
       render plain: params[:car]
     end
@@ -27,6 +23,6 @@ class CarController < ApplicationController
 
   private
   def car_params
-    params.require(:car).permit(:manufacturer, :model_name, :license_number)
+    params.require(:car).permit(:manufacturer, :model, :license_number)
   end
 end

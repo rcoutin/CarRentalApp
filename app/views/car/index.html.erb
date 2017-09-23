@@ -1,22 +1,18 @@
-<<<<<<< HEAD
 <h1>Cars</h1>
 
 <table>
   <tr>
-    <th>First Name</th>
-    <th>Last Name</th>
+    <th>Manufacturer</th>
+    <th>Model Name</th>
     <th>License Number</th>
   </tr>
 
-  <% @customers.each do |customer| %>
+  <% @car.each do |car| %>
       <tr>
-        <td><%= customer.first_name %></td>
-        <td><%= customer.last_name %></td>
-        <td><%= customer.license_number %></td>
-        <td><%= link_to 'Show', customer_path(customer) %></td>
+        <td><%= car.manufacturer %></td>
+        <td><%= car.model %></td>
+        <td><%= car.license_number %></td>
+        <td><%= link_to 'Show', car_index_path(car) %></td>
       </tr>
   <% end %>
 </table>
-=======
-Index
->>>>>>> fb47917380abf6f2aa9b3be7a285fc7dc8133cb5
