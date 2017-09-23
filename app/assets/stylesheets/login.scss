@@ -3,11 +3,13 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body{
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	text-align: center;
-	height: 80vh;
-	font-family: "Open Sans";
-	font-weight: 100;
+	.login-page-new{	
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		text-align: center;
+		height: 80vh;
+		font-family: "Open Sans";
+		font-weight: 100;
+	}
 }
