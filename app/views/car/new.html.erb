@@ -1,5 +1,5 @@
 <h1>Add a Car</h1>
-<%= form_with scope: :car, url: car_path, local: true do |form| %>
+<%= form_with scope: :car, url: car_index_path, local: true do |form| %>
     <p>
       <%= form.label :manufacturer %><br>
       <%= form.text_field :manufacturer %>

@@ -14,7 +14,7 @@ class CarController < ApplicationController
   end
 
   def create
-  @car = Car.new(params.require(:car).permit(:manufacturer, :model_name, :license_number))
+  @car = Car.new(params.require(:car).permit(:manufacturer, :model, :license_number))
 
     if @car.save
       redirect @car
