@@ -16,7 +16,7 @@ class CustomersController < ApplicationController
     if @customer.save
       redirect_to @customer
     else
-      render plain: params[:article].inspect
+      render plain: params[:customer].inspect
     end
   end
 
