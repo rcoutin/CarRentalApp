@@ -7,12 +7,12 @@
     <th>License Number</th>
   </tr>
 
-  <% @car.each do |car| %>
+  <% @cars.each do |car| %>
       <tr>
         <td><%= car.manufacturer %></td>
         <td><%= car.model %></td>
         <td><%= car.license_number %></td>
-        <td><%= link_to 'Show', car_index_path(car) %></td>
+        <td><%= link_to 'Show', car_path(car) %></td>
       </tr>
   <% end %>
 </table>

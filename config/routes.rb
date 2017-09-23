@@ -3,6 +3,6 @@ Rails.application.routes.draw do
   resources :customers
   resources :login, only: [:new, :create], as: :login
 
-  resources :car
+  resources :cars
   root 'login#new'
 end
