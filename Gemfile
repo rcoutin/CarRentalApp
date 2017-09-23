@@ -54,3 +54,6 @@ gem 'email_validator'
 
 # Password Check
 gem 'bcrypt'
+
+#Bootstrap
+gem 'bootstrap-sass'

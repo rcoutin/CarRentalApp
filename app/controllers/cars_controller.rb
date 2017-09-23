@@ -1,7 +1,7 @@
-class CarController < ApplicationController
+class CarsController < ApplicationController
 
   def index
-    @car = Car.all
+    @cars = Car.all
   end
 
   def show
@@ -14,10 +14,10 @@ class CarController < ApplicationController
   def create
   @car = Car.new(car_params)
 
-    if @car.save
+  if @car.save
       redirect_to @car
     else
-      render plain: params[:car]
+      render plain: params[:cars]
     end
   end
 
