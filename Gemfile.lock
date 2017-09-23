@@ -1,6 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    action_access (0.1.1)
+      rails (>= 4.1)
     actioncable (5.1.4)
       actionpack (= 5.1.4)
       nio4r (~> 2.0)
@@ -176,6 +178,7 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
+  action_access
   bcrypt
   byebug
   capybara (~> 2.13)

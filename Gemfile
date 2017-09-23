@@ -54,3 +54,6 @@ gem 'email_validator'
 
 # Password Check
 gem 'bcrypt'
+
+# Access control
+gem 'action_access'

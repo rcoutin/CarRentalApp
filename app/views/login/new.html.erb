@@ -2,12 +2,12 @@
   <h1>Login</h1>
   <%= form_with scope: :login, url: login_index_path, local: true do |form| %>
     <p>
-      <%= form.label :email %><br>
+      <%= form.label :email %>
       <%= email_field(:login, :email) %>
     </p>
 
     <p>
-      <%= form.label :password %><br>
+      <%= form.label :password %>
       <%= password_field(:login, :password) %>
     </p>
 
