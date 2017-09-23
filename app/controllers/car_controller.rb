@@ -5,8 +5,6 @@ class CarController < ApplicationController
   end
 
   def show
-    puts "the params ares"
-    puts params
     @car = Car.find(params[:id])
   end
 
@@ -14,7 +12,11 @@ class CarController < ApplicationController
   end
 
   def create
+<<<<<<< HEAD
   @car = Car.new(params.require(:car).permit(:manufacturer, :model, :license_number))
+=======
+  @car = Car.new(car_params)
+>>>>>>> fb47917380abf6f2aa9b3be7a285fc7dc8133cb5
 
     if @car.save
       redirect @car
