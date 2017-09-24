@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170924154529) do
+
+ActiveRecord::Schema.define(version: 20170924144622) do
 
   create_table "admins", force: :cascade do |t|
     t.string "first_name"
@@ -37,5 +38,14 @@ ActiveRecord::Schema.define(version: 20170924154529) do
 
 # Could not dump table "customers" because of following StandardError
 #   Unknown type 'real' for column 'rental_charge'
+
+  create_table "reservations", force: :cascade do |t|
+    t.string "customer_id"
+    t.string "car_id"
+    t.datetime "from_time"
+    t.datetime "to_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end

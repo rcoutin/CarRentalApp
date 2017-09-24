@@ -6,5 +6,7 @@ Rails.application.routes.draw do
   resources :login, only: [:new, :create], as: :login
 
   resources :cars
+  resources :reservations
+  
   root 'login#new'
 end
