@@ -1,0 +1,36 @@
+<h1>Edit details</h1>
+<%= form_with scope: :customer, url: customer_path, method: :put, local: true do |form| %>
+  <p>
+    <%= form.label :first_name %><br>
+    <%= form.text_field :first_name %>
+  </p>
+
+  <p>
+    <%= form.label :last_name %><br>
+    <%= form.text_field :last_name %>
+  </p>
+
+  <p>
+    <%= form.label :email %><br>
+    <%= @customer.email %>
+  </p>
+
+  <p>
+    <%= form.label :password %><br>
+    <%= password_field(:customer, :password) %>
+  </p>
+
+  <p>
+    <%= form.label :date_of_birth %><br>
+    <%= date_field(:customer, :date_of_birth) %>
+  </p>
+
+  <p>
+    <%= form.label :license_number %><br>
+    <%= form.text_field :license_number %>
+  </p>
+
+  <p>
+    <%= form.submit "Edit details"%>
+  </p>
+<% end %>
