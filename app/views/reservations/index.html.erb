@@ -10,10 +10,10 @@
 
   <% @reservations.each do |reservation| %>
     <tr>
-      <td><%= @customers.find(reservation.user_id).id %></td>
+      <td><%= @customers.find(reservation.customer_id).id %></td>
       <td><%= @cars.find(reservation.car_id).id %></td>
       <td><%= @reservation.from_time  %></td>
-      <td><%= @reservation.end_time %></td>
+      <td><%= @reservation.to_time %></td>
     </tr>
   <% end %>
 </table>
