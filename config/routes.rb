@@ -4,7 +4,8 @@ Rails.application.routes.draw do
 
   resources :customers
   resources :login, only: [:new, :create], as: :login
-
+  resources :admins_login, only: [:new, :create], as: :admins_login
+  resources :admins
   resources :cars
   resources :reservations
   

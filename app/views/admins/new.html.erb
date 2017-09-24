@@ -1,0 +1,31 @@
+<h1>Create Admin</h1>
+<%= form_with scope: :admin, url: admins_path, local: true do |form| %>
+  <p>
+    <%= form.label :first_name %><br>
+    <%= form.text_field :first_name %>
+  </p>
+
+  <p>
+    <%= form.label :last_name %><br>
+    <%= form.text_field :last_name %>
+  </p>
+
+  <p>
+    <%= form.label :email %><br>
+    <%= email_field(:admin, :email) %>
+  </p>
+
+  <p>
+    <%= form.label :password %><br>
+    <%= password_field(:admin, :password) %>
+  </p>
+
+  <p>
+    <%= form.label :is_super_admin %><br>
+    <%= form.check_box :is_super_admin %>
+  </p>
+
+  <p>
+    <%= form.submit "Create Admin"%>
+  </p>
+<% end %>
