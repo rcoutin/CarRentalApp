@@ -1,5 +1,9 @@
 class LoginController < ApplicationController
   def new
+    if logged_in
+      @customer = Customer.find(session[:current_user])
+      redirect_to @customer
+    end
   end
   def create
     customer = Customer.find_by(email: params[:login][:email].downcase)
