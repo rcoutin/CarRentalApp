@@ -1,10 +1,8 @@
 class CustomersController < ApplicationController
-  def index
-    @customers = Customer.all
-  end
-
   def show
-    @customer = Customer.find(params[:id])
+    if check_authority
+      @customer = Customer.find(session[:current_user])
+    end
   end
 
   def new
@@ -14,7 +12,7 @@ class CustomersController < ApplicationController
     @customer = Customer.new(customer_params)
 
     if @customer.save
-      redirect_to @customer
+      redirect_to new_login_path
     else
       render plain: params[:customer].inspect
     end

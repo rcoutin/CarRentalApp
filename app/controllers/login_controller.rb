@@ -4,6 +4,7 @@ class LoginController < ApplicationController
   def create
     customer = Customer.find_by(email: params[:login][:email].downcase)
     if customer && customer.authenticate(params[:login][:password])
+      sign_in customer.id, "customer"
       redirect_to customer
     else
       flash[:danger] = 'Invalid email/password combination' # Not quite right!
