@@ -14,6 +14,7 @@
       <td><%= reservation.car_id %></td>
       <td><%= reservation.from_time  %></td>
       <td><%= reservation.to_time %></td>
+      <td><%= link_to 'Edit', [:edit, reservation] %></td>
     </tr>
   <% end %>
 </table>

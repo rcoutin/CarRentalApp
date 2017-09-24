@@ -47,6 +47,9 @@ class ReservationsController < ApplicationController
       end
   end
 
+  def edit
+  end
+
   private
 
   def set_reservation
