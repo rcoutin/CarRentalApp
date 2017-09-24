@@ -1,0 +1,18 @@
+<div class="admin-login-page-new">
+  <h1>Login</h1>
+  <%= form_with scope: :admins_login, url: admins_login_index_path, local: true do |form| %>
+    <p>
+      <%= form.label :email %>
+      <%= email_field(:admins_login, :email) %>
+    </p>
+
+    <p>
+      <%= form.label :password %>
+      <%= password_field(:admins_login, :password) %>
+    </p>
+
+    <p>
+      <%= form.submit "Log In"%>
+    </p>
+  <% end %>
+</div>

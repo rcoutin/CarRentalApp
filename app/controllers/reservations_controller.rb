@@ -8,6 +8,7 @@ class ReservationsController < ApplicationController
   end
 
   def show
+    @reservation = Reservation.find(params[:id])
   end
 
   def new
@@ -16,16 +17,22 @@ class ReservationsController < ApplicationController
 
   def create
     @reservation = Reservation.new(reservation_params)
-
-    respond_to do |process|
-      if @reservation.save
-        process.html{ redirect_to @reservation, notice: 'Reservation created successfully.' }
-        process.json{ render :show, status: created, location: @reservation }
+    begin
+      respond_to do |process|
+        if @reservation.save
+          process.html{ redirect_to @reservation, notice: 'Reservation created successfully.' }
+          process.json{ render :show, status: created, location: @reservation }
         else
           process.html{ render :new }
           process.json{ render json: @reservation.errors, status: unprocessable_entity }
         end
       end
+    rescue ActiveRecord::RecordNotUnique => e
+      respond_to do |process|
+        process.html{ render :new, notice: 'Cannot reserve!'}
+        process.json{ render json: @reservation.errors, status: unprocessable_entity }
+      end
+    end
   end
 
   def update

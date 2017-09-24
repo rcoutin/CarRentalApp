@@ -11,6 +11,8 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20170924144622) do
+ActiveRecord::Schema.define(version: 20170924154529) do
+>>>>>>> 553210492f597ef84b70fa82ab9787d41c25b474
 
   create_table "admins", force: :cascade do |t|
     t.string "first_name"
@@ -45,15 +47,20 @@ ActiveRecord::Schema.define(version: 20170924144622) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
+    t.float "rental_charge", default: 0.0
   end
 
   create_table "reservations", force: :cascade do |t|
     t.string "customer_id"
     t.string "car_id"
+    t.integer "customer_id"
+    t.integer "car_id"
     t.datetime "from_time"
     t.datetime "to_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["car_id"], name: "index_reservations_on_car_id", unique: true
+    t.index ["customer_id"], name: "index_reservations_on_customer_id", unique: true
   end
 
 end

@@ -4,4 +4,5 @@ class Car < ApplicationRecord
   validates :manufacturer, presence: true
   validates :model, presence: true, inclusion {in: ""}
   validates :style, presence: true
+  has_one :reservation
 end
