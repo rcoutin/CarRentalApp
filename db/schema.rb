@@ -35,8 +35,18 @@ ActiveRecord::Schema.define(version: 20170924154529) do
     t.string "location"
   end
 
-# Could not dump table "customers" because of following StandardError
-#   Unknown type 'real' for column 'rental_charge'
+  create_table "customers", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "password"
+    t.date "date_of_birth"
+    t.string "license_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "password_digest"
+    t.float "rental_charge", default: 0.0
+  end
 
   create_table "reservations", force: :cascade do |t|
     t.string "customer_id"
