@@ -15,14 +15,18 @@ class ApplicationController < ActionController::Base
   helper_method :sign_out
 
   def check_authority
-  	puts "1"
   	if session[:current_user] == -1
-  		puts "2"
   		redirect_to unauthorized_show_path
-  		puts "3"
   		return false
   	end
   return true
+  end
+
+  def logged_in
+  	if session[:current_user] && session[:current_user] != -1
+  		return true
+  	end
+  	return false
   end
 
 end

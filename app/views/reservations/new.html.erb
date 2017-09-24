@@ -1,9 +1,7 @@
 <h1>Reserve a car!</h1>
 <%= form_with scope: :reservation, url: reservations_path, local: true do |form| %>
-  <p>
-    <%= form.label :customer_id %>:
-    <%= form.text_field :customer_id %>
-  </p>
+
+    <%= form.hidden_field :customer_id, value: session[:current_user] %>
 
   <p>
     <%= form.label :car_id %>:
@@ -14,6 +12,7 @@
     <%= form.label :from_time %>:
     <%= datetime_field(:reservation, :from_time) %>
   </p>
+
 
   <p>
     <%= form.label :to_time %>:

@@ -2,18 +2,18 @@
 
 <table>
   <tr>
-    <th>UserID</th>
-    <th>CarID</th>
+    <th>User ID</th>
+    <th>Car ID</th>
     <th>Reserved From</th>
     <th>Reserved Till</th>
   </tr>
 
   <% @reservations.each do |reservation| %>
     <tr>
-      <td><%= @customers.find(reservation.customer_id).id %></td>
-      <td><%= @cars.find(reservation.car_id).id %></td>
-      <td><%= @reservation.from_time  %></td>
-      <td><%= @reservation.to_time %></td>
+      <td><%= reservation.customer_id %></td>
+      <td><%= reservation.car_id %></td>
+      <td><%= reservation.from_time  %></td>
+      <td><%= reservation.to_time %></td>
     </tr>
   <% end %>
 </table>
