@@ -11,4 +11,13 @@ class Car < ApplicationRecord
   validates :location, presence: true
 
   has_one :reservation
+
+  def self.search(term)
+    if term
+      where('model LIKE ? OR manufacturer LIKE ? OR style LIKE ?', "%#{term}%", "%#{term}%", "%#{term}%")
+    else
+      all
+    end
+
+  end
 end

@@ -2,14 +2,13 @@ class CarsController < ApplicationController
 
   def index
     if session[:user_type] == 'admin'
-      @cars = Car.all
+      @cars =  Car.search(params[:search])
     else
        @cars = Car.where(:status => "A")
     end
   end
 
   def show
-    puts "going here"
     @car = Car.find(params[:id])
   end
   def create
@@ -34,6 +33,7 @@ class CarsController < ApplicationController
   end
   private
   def car_params
-    params.require(:cars).permit(:manufacturer, :model, :license_number, :status, :style,:rate,:location)
+    params.require(:cars).permit(:manufacturer, :model, :license_number, :status, :style, :rate,:location, :search)
+
   end
 end

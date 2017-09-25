@@ -24,3 +24,7 @@
 Gemfile.lock
 Gemfile.lock
 Gemfile
+Gemfile.lock
+*.lock
+Gemfile.lock
+*.lock

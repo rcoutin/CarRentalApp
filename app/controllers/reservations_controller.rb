@@ -20,6 +20,8 @@ class ReservationsController < ApplicationController
 
   def new
     @reservation = Reservation.new
+    # @reservation.from_time = Time.now.strftime("%FT%T")
+    # @reservation.to_time = Time.now.strftime("%FT%T")
   end
 #Set the status of the car to R when a user reserves it
   def car_status=(status)
@@ -45,7 +47,17 @@ class ReservationsController < ApplicationController
         process.html{ render :new, notice: 'Cannot reserve!'}
         process.json{ render json: @reservation.errors, status: unprocessable_entity }
       end
+    if @reservation.save
+      flash.now[:success] = 'Reservation created successfully.'
+      redirect_to @reservation
+    else
+      flash.now[:danger] = "Wrong Entries."
+      redirect_to cars_path
     end
+    rescue ActiveRecord::RecordNotUnique => e
+        flash.now[:danger] = 'Cannot reserve!'
+        redirect_to cars_path
+    
   end
 
   def update
