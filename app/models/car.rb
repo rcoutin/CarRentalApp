@@ -11,9 +11,10 @@ class Car < ApplicationRecord
 
   def self.search(term)
     if term
-      where('model LIKE ?', "%#{term}%")
+      where('model LIKE ? OR manufacturer LIKE ? OR style LIKE ?', "%#{term}%", "%#{term}%", "%#{term}%")
     else
       all
     end
+
   end
 end

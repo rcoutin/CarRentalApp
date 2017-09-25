@@ -1,7 +1,7 @@
 <h1>Cars</h1>
 
 <%= form_tag(cars_path, method: :get) do %>
-  Search by model name:
+  Search:
   <%= text_field_tag :search, params[:search] %>
   <%= submit_tag 'Search', name: nil %>
 <% end %>
