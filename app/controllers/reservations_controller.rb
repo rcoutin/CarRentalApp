@@ -12,11 +12,12 @@ class ReservationsController < ApplicationController
   end
 
   def new
-    #@reservation = Reservation.new
+    @reservation = Reservation.new
   end
 
   def create
     @reservation = Reservation.new(reservation_params)
+    puts reservation_params
     begin
       respond_to do |process|
         if @reservation.save
