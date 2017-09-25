@@ -13,6 +13,8 @@ class ReservationsController < ApplicationController
 
   def new
     @reservation = Reservation.new
+    @reservation.from_time = Time.now.strftime("%FT%T")
+    @reservation.to_time = Time.now.strftime("%FT%T")
   end
 
   def create
