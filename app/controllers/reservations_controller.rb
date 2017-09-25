@@ -2,11 +2,18 @@ class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
 
   def index
-    @reservations = Reservation.all
-    @customers = Customer.all
-    @cars = Car.all
-  end
 
+    if session[:user_type] == 'admin'
+
+    @reservations = Reservation.all
+      else
+      @reservations = Reservation.where(:customer_id => session[:current_user])
+      @cars = Car.joins("INNER JOIN reservations ON cars.id = reservations.car_id").select(:id, :status)
+      @cars.each { |x| params[x.id.to_s] = x.status}
+      puts params
+
+      end
+  end
   def show
     @reservation = Reservation.find(params[:id])
   end
@@ -14,10 +21,15 @@ class ReservationsController < ApplicationController
   def new
     @reservation = Reservation.new
   end
+#Set the status of the car to R when a user reserves it
+  def car_status=(status)
+    car = Car.find(params[:reservation][:car_id])
+    Car.update(:status => status)
+  end
 
   def create
     @reservation = Reservation.new(reservation_params)
-    puts reservation_params
+    car_status = "R"
     begin
       respond_to do |process|
         if @reservation.save
@@ -50,7 +62,19 @@ class ReservationsController < ApplicationController
 
   def edit
   end
+#checking out the car
+  def checkout
+    car_status  = "C"
+  end
+#cancel the reservation
+  def cancel
 
+    car_status = "A"
+  end
+
+  def car_status
+
+  end
   private
 
   def set_reservation

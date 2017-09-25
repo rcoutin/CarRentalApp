@@ -15,6 +15,15 @@
       <td><%= reservation.from_time  %></td>
       <td><%= reservation.to_time %></td>
       <td><%= link_to 'Edit', [:edit, reservation] %></td>
+      <td><%= params[reservation.car_id] %></td>
+      <% if params[reservation.car_id] == "R" %>
+          <td><%= link_to 'Cancel', [:edit, reservation] %></td>
+          <td><%= link_to 'Checkout', [:edit, reservation] %></td>
+      <% elsif params[reservation.car_id] == "C"  %>
+          <td><%= link_to 'Return', [:edit, reservation] %></td>
+    <% end %>
+
+
     </tr>
   <% end %>
 </table>

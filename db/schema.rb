@@ -49,14 +49,12 @@ ActiveRecord::Schema.define(version: 20170924154529) do
   end
 
   create_table "reservations", force: :cascade do |t|
-    t.integer "customer_id"
-    t.integer "car_id"
+    t.string "customer_id"
+    t.string "car_id"
     t.datetime "from_time"
     t.datetime "to_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["car_id"], name: "index_reservations_on_car_id", unique: true
-    t.index ["customer_id"], name: "index_reservations_on_customer_id", unique: true
   end
 
 end
