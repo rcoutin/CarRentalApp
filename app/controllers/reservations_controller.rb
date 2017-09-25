@@ -13,29 +13,23 @@ class ReservationsController < ApplicationController
 
   def new
     @reservation = Reservation.new
-    @reservation.from_time = Time.now.strftime("%FT%T")
-    @reservation.to_time = Time.now.strftime("%FT%T")
+    # @reservation.from_time = Time.now.strftime("%FT%T")
+    # @reservation.to_time = Time.now.strftime("%FT%T")
   end
 
   def create
     @reservation = Reservation.new(reservation_params)
-    puts reservation_params
-    begin
-      respond_to do |process|
-        if @reservation.save
-          process.html{ redirect_to @reservation, notice: 'Reservation created successfully.' }
-          process.json{ render :show, status: created, location: @reservation }
-        else
-          process.html{ render :new }
-          process.json{ render json: @reservation.errors, status: unprocessable_entity }
-        end
-      end
-    rescue ActiveRecord::RecordNotUnique => e
-      respond_to do |process|
-        process.html{ render :new, notice: 'Cannot reserve!'}
-        process.json{ render json: @reservation.errors, status: unprocessable_entity }
-      end
+    if @reservation.save
+      flash.now[:success] = 'Reservation created successfully.'
+      redirect_to @reservation
+    else
+      flash.now[:danger] = "Wrong Entries."
+      redirect_to cars_path
     end
+    rescue ActiveRecord::RecordNotUnique => e
+        flash.now[:danger] = 'Cannot reserve!'
+        redirect_to cars_path
+    
   end
 
   def update

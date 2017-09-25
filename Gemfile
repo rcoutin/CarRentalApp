@@ -63,7 +63,11 @@ gem 'email_validator'
 gem 'bcrypt'
 
 #Bootstrap
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'autoprefixer-rails'
 
 #Time validation
 gem 'jc-validates_timeliness', '~> 3.1.1'
+
+#jQuery
+gem 'jquery-rails'
