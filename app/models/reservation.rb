@@ -9,6 +9,12 @@ class Reservation < ApplicationRecord
   validate :from_time_and_to_time_comparison
 
   def from_time_and_to_time_comparison
+ 		if from_time - DateTime.current < 0
+ 			errors.add(:from_time, 'Time cannot be in the past.')
+ 		end
+ 		if (from_time - DateTime.current) / 24 / 60 / 60 > 7
+ 			errors.add(:from_time, 'The reservation time has to be in the next one week.')
+ 		end
   	if to_time < from_time
   		errors.add(:to_time, 'The time cannot be before the initial reservation time.')
   	end
