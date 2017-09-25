@@ -13,9 +13,9 @@
       <td><%= car.model %></td>
       <td><%= car.license_number %></td>
       <td><%= car.location %></td>
-      <td><%= car.rate%></td>
+      <td><%= car.rate %></td>
       <td><%= link_to 'Reserve', new_reservation_path(:car_id => car.id, :car_model => car.model) %></td>
-      <td><%= link_to 'Show', cars_path %></td>
+      <td><%= link_to 'Show', car_path(car.id) %></td>
     </tr>
 <% end %>
 </table>

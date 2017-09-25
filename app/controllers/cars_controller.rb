@@ -5,6 +5,7 @@ class CarsController < ApplicationController
   end
 
   def show
+    puts "going here"
     @car = Car.find(params[:id])
   end
 
