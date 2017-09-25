@@ -18,11 +18,11 @@ class CarsController < ApplicationController
       redirect_to @car
     else
       render plain: params[:cars]
-    end
+  end
   end
 
   private
   def car_params
-    params.require(:cars).permit(:manufacturer, :model, :license_number)
+    params.require(:cars).permit(:manufacturer, :model, :license_number, :status, :style)
   end
 end

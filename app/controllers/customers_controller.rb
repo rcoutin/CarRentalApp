@@ -10,6 +10,7 @@ class CustomersController < ApplicationController
 
   def create
     @customer = Customer.new(customer_params)
+    puts params[:customer]
 
     if @customer.save
       redirect_to new_login_path

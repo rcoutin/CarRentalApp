@@ -15,6 +15,14 @@
     </p>
 
     <p>
-      <%= form.submit %>
+      <%= form.label :style %><br>
+      <%= form.text_field :style %>
+    </p>
+    <p>
+      <%= form.label :status %><br>
+      <%= form.text_field :status %>
+    </p>
+    <p>
+      <%= form.submit  %>
     </p>
 <% end %>
