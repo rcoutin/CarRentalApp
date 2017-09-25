@@ -11,8 +11,8 @@ class LoginController < ApplicationController
       sign_in customer.id, "customer"
       redirect_to customer
     elsif !customer || !customer.authenticate(params[:login][:password])
-      flash[:danger] = 'Invalid email/password combination'
-      render 'new'
+      flash.now[:danger] = 'Invalid email/password combination'
+      render :action => :new
     end
   end
 end
