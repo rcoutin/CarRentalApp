@@ -57,3 +57,6 @@ gem 'bcrypt'
 
 #Bootstrap
 gem 'bootstrap-sass'
+
+#Time validation
+gem 'jc-validates_timeliness', '~> 3.1.1'
