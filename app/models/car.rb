@@ -8,4 +8,12 @@ class Car < ApplicationRecord
   validates :status, presence: true, inclusion: {in: ["R", "C", "A"]}
 
   has_one :reservation
+
+  def self.search(term)
+    if term
+      where('model LIKE ?', "%#{term}%")
+    else
+      all
+    end
+  end
 end
