@@ -47,3 +47,52 @@ No user can be currently deleted.
 
 * _Deleting cars_  
 No one can delete cars.
+
+## Routes
+```
+             Prefix Verb   URI Pattern                      Controller#Action
+    unauthorized_show GET    /unauthorized/show(.:format)     unauthorized#show
+ application_sign_out GET    /application/sign_out(.:format)  application#sign_out
+  reservations_cancel GET    /reservations/cancel(.:format)   reservations#cancel
+reservations_checkout GET    /reservations/checkout(.:format) reservations#checkout
+  reservations_return GET    /reservations/return(.:format)   reservations#return
+            customers GET    /customers(.:format)             customers#index
+                      POST   /customers(.:format)             customers#create
+         new_customer GET    /customers/new(.:format)         customers#new
+        edit_customer GET    /customers/:id/edit(.:format)    customers#edit
+             customer GET    /customers/:id(.:format)         customers#show
+                      PATCH  /customers/:id(.:format)         customers#update
+                      PUT    /customers/:id(.:format)         customers#update
+                      DELETE /customers/:id(.:format)         customers#destroy
+          login_index POST   /login(.:format)                 login#create
+            new_login GET    /login/new(.:format)             login#new
+   admins_login_index POST   /admins_login(.:format)          admins_login#create
+     new_admins_login GET    /admins_login/new(.:format)      admins_login#new
+               admins GET    /admins(.:format)                admins#index
+                      POST   /admins(.:format)                admins#create
+            new_admin GET    /admins/new(.:format)            admins#new
+           edit_admin GET    /admins/:id/edit(.:format)       admins#edit
+                admin GET    /admins/:id(.:format)            admins#show
+                      PATCH  /admins/:id(.:format)            admins#update
+                      PUT    /admins/:id(.:format)            admins#update
+                      DELETE /admins/:id(.:format)            admins#destroy
+                 cars GET    /cars(.:format)                  cars#index
+                      POST   /cars(.:format)                  cars#create
+              new_car GET    /cars/new(.:format)              cars#new
+             edit_car GET    /cars/:id/edit(.:format)         cars#edit
+                  car GET    /cars/:id(.:format)              cars#show
+                      PATCH  /cars/:id(.:format)              cars#update
+                      PUT    /cars/:id(.:format)              cars#update
+                      DELETE /cars/:id(.:format)              cars#destroy
+         reservations GET    /reservations(.:format)          reservations#index
+                      POST   /reservations(.:format)          reservations#create
+      new_reservation GET    /reservations/new(.:format)      reservations#new
+     edit_reservation GET    /reservations/:id/edit(.:format) reservations#edit
+          reservation GET    /reservations/:id(.:format)      reservations#show
+                      PATCH  /reservations/:id(.:format)      reservations#update
+                      PUT    /reservations/:id(.:format)      reservations#update
+                      DELETE /reservations/:id(.:format)      reservations#destroy
+                 root GET    /                                login#new
+
+
+```
