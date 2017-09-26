@@ -1,7 +1,7 @@
 <h1>Reserve a Car</h1>
 <%= form_with scope: :reservation, url: reservations_path, local: true do |form| %>
 
-  <% if session[:user_type] == 'admin' %>
+  <% if !is_customer? %>
     <p>
       <%= form.label :customer_id %>:
       <%= form.text_field :customer_id, value: session[:current_user] %>

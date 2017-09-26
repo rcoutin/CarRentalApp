@@ -3,7 +3,7 @@ class ReservationsController < ApplicationController
 
   def index
 
-    if session[:user_type] == 'admin'
+    if !is_customer?
       @reservations = Reservation.all
       else
       @reservations = Reservation.where(:customer_id => session[:current_user])
@@ -31,9 +31,11 @@ class ReservationsController < ApplicationController
   def create
     @reservation = Reservation.new(reservation_params)
 
+    begin
     if @reservation.save
       Car.find(params[:reservation][:car_id]).update(:status => status)
       #car_status("R")
+
       flash.now[:success] = 'Reservation created successfully.'
       redirect_to @reservation
     else
@@ -41,8 +43,9 @@ class ReservationsController < ApplicationController
       redirect_to cars_path
     end
     rescue ActiveRecord::RecordNotUnique => e
-        flash.now[:danger] = 'Cannot reserve!'
-        redirect_to cars_path
+      flash.now[:danger] = 'Cannot reserve!'
+      redirect_to cars_path
+    end
   end
 
   def update

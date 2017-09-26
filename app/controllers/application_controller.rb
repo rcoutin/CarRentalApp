@@ -1,6 +1,11 @@
 class  ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
+  before_action :check_unauthorized_access
+
+  @@allowed_controllers = ["login", "admins_login"]
+  @@disallowed_actions = ["index", "show", "edit"]
+
   def sign_in(user_id, user_type)
   	session[:current_user] = user_id
   	session[:user_type] = user_type
@@ -23,10 +28,17 @@ class  ApplicationController < ActionController::Base
   end
 
   def logged_in
+    puts params[:action]
   	if session[:current_user] && session[:current_user] != -1
   		return true
   	end
   	return false
+  end
+
+  def check_unauthorized_access
+    if !logged_in && !@@allowed_controllers.include?(params[:controller]) && @@disallowed_actions.include?(params[:action])
+      redirect_to new_login_path
+    end
   end
 
   def is_customer?
