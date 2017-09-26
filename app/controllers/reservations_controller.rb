@@ -3,7 +3,7 @@ class ReservationsController < ApplicationController
 
   def index
 
-    if session[:user_type] == 'admin'
+    if !is_customer?
       @reservations = Reservation.all
       else
       @reservations = Reservation.where(:customer_id => session[:current_user])
@@ -25,14 +25,17 @@ class ReservationsController < ApplicationController
     puts params
     puts "inside the settetr method"
     # car = Car.find(params[:reservation][:car_id])
-    Car.find(params[:reservation][:car_id]).update(:status => status)
+  #  Car.find(params[:reservation][:car_id]).update(:status => status)
   end
 
   def create
     @reservation = Reservation.new(reservation_params)
+
     begin
     if @reservation.save
-      car_status("R")
+      Car.find(params[:reservation][:car_id]).update(:status => status)
+      #car_status("R")
+
       flash.now[:success] = 'Reservation created successfully.'
       redirect_to @reservation
     else
@@ -74,7 +77,6 @@ class ReservationsController < ApplicationController
   def return
      cancel
   end
-
 
   private
   def set_reservation
