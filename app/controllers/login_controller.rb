@@ -1,8 +1,12 @@
 class LoginController < ApplicationController
   def new
-    if logged_in
+    if logged_in && is_customer?
       @customer = Customer.find(session[:current_user])
       redirect_to @customer
+    end
+    if logged_in & !is_customer?
+      @admin = Admin.find(session[:current_user])
+      redirect_to @admin
     end
   end
   def create
