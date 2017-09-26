@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   get 'unauthorized/show'
   get 'application/sign_out'
   get 'reservations/cancel'
+  get 'reservations/checkout'
+  get 'reservations/return'
 
   resources :customers
   resources :login, only: [:new, :create], as: :login
@@ -9,6 +11,6 @@ Rails.application.routes.draw do
   resources :admins
   resources :cars
   resources :reservations
-  
+
   root 'login#new'
 end

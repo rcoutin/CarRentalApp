@@ -59,16 +59,20 @@ class ReservationsController < ApplicationController
   end
 #checking out the car
   def checkout
-    car_status("C")
+    Car.find(params[:car_id]).update(:status => "C")
+    redirect_to reservations_path
   end
 #cancel the reservation
   def cancel
-    puts params
     Reservation.destroy(params[:reservation_id])
     Car.find(params[:car_id]).update(:status => "A")
     redirect_to reservations_path
-    # car_status("A")
   end
+
+  def return
+     cancel
+  end
+
 
   private
   def set_reservation
