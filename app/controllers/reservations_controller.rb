@@ -3,7 +3,7 @@ class ReservationsController < ApplicationController
 
   def index
 
-    if session[:user_type] == 'admin'
+    if !is_customer?
       @reservations = Reservation.all
       else
       @reservations = Reservation.where(:customer_id => session[:current_user])
