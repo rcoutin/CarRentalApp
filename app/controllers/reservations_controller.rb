@@ -30,9 +30,9 @@ class ReservationsController < ApplicationController
 
   def create
     @reservation = Reservation.new(reservation_params)
-    car_status("R")
     begin
     if @reservation.save
+      car_status("R")
       flash.now[:success] = 'Reservation created successfully.'
       redirect_to @reservation
     else
