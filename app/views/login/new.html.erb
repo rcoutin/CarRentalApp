@@ -12,9 +12,9 @@
     </p>
 
     <p>
-      <%= form.submit "Log In"%>
+      <%= form.submit "Log In", :class => "btn btn-primary"%>
     </p>
-    <p>New user? <%= link_to "Sign up now!", new_customer_path %></p>
-    <p>Admin? <%= link_to "Login as Admin", new_admins_login_path %></p>
+    <p>New user? <%= link_to "Sign up now!", new_customer_path , :class => "btn btn-success"%></p>
+    <p>Admin? <%= link_to "Login as Admin", new_admins_login_path , :class => "btn btn-info"%></p>
   <% end %>
 </div>
