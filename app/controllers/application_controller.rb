@@ -29,4 +29,27 @@ class ApplicationController < ActionController::Base
   	return false
   end
 
+  def is_customer?
+    if session[:user_type] == "customer"
+      return true
+    end
+    return false
+  end
+  helper_method :is_customer?
+
+  def is_super_admin?
+    if session[:user_type] == "super_admin"
+      return true
+    end
+    return false
+  end
+  helper_method :is_super_admin?
+
+  def is_admin?
+    if session[:user_type] == "admin"
+      return true
+    end
+    return false
+  end
+  helper_method :is_admin?
 end

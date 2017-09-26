@@ -1,4 +1,12 @@
 class CustomersController < ApplicationController
+  def index
+    if !is_customer?
+      @customers = Customer.all
+    else
+      redirect_to unauthorized_show_path
+    end
+  end
+
   def show
     if check_authority
       @customer = Customer.find(session[:current_user])

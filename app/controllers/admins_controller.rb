@@ -1,11 +1,16 @@
 class AdminsController < ApplicationController
   def show
-    if check_authority
+    if check_authority && !is_customer?
       @admin = Admin.find(session[:current_user])
+    else
+      redirect_to unauthorized_show_path
     end
   end
 
   def new
+    if is_customer?
+      redirect_to unauthorized_show_path
+    end
   end
 
   def create
