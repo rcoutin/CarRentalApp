@@ -35,3 +35,15 @@ Superadmins can add admins and superadmins. They perform everything that an admi
 
 * _Reservations_  
 A reservation can only succeed when the customer does not have any current reservation. The car has to be available for the reservation to take place.
+
+## Functionality not covered - We're working on it!
+* _Viewing Past Reservations_  
+Customer cannot view his past reservations. Once a reservation is done, it cannot be retrieved again (for now).
+
+
+* _Deleting users/admin_  
+No user can be currently deleted.
+
+
+* _Deleting cars_  
+No one can delete cars.
