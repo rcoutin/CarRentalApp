@@ -3,7 +3,7 @@ class  ApplicationController < ActionController::Base
 
   before_action :check_unauthorized_access
 
-  @@allowed_controllers = ["login", "admins_login"]
+  @@allowed_controllers = ["login", "admins_login", "admin"]
   @@disallowed_actions = ["index", "show", "edit"]
 
   def sign_in(user_id, user_type)

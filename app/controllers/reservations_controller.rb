@@ -20,21 +20,14 @@ class ReservationsController < ApplicationController
     # @reservation.from_time = Time.now.strftime("%FT%T")
     # @reservation.to_time = Time.now.strftime("%FT%T")
   end
-#Set the status of the car to R when a user reserves it
-  def car_status(status)
-    puts params
-    puts "inside the settetr method"
-    # car = Car.find(params[:reservation][:car_id])
-  #  Car.find(params[:reservation][:car_id]).update(:status => status)
-  end
+
 
   def create
     @reservation = Reservation.new(reservation_params)
 
     begin
     if @reservation.save
-      Car.find(params[:reservation][:car_id]).update(:status => status)
-      #car_status("R")
+      Car.set_status(params[:car_id],"R")
 
       flash.now[:success] = 'Reservation created successfully.'
       redirect_to @reservation
@@ -64,13 +57,15 @@ class ReservationsController < ApplicationController
   end
 #checking out the car
   def checkout
-    Car.find(params[:car_id]).update(:status => "C")
+    Car.set_status(params[:car_id],"C")
     redirect_to reservations_path
   end
 #cancel the reservation
   def cancel
     Reservation.destroy(params[:reservation_id])
-    Car.find(params[:car_id]).update(:status => "A")
+    #Car.find(params[:car_id]).update(:status => "A")
+    Car.set_status(params[:car_id],"A")
+
     redirect_to reservations_path
   end
 
