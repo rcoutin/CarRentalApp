@@ -20,7 +20,7 @@ class Car < ApplicationRecord
     end
   end
 
-  def set_status(car_id, status)
+  def self.set_status(car_id, status)
    find(car_id).update(:status => status)
   end
 end

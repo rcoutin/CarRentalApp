@@ -27,7 +27,7 @@ class ReservationsController < ApplicationController
 
     begin
     if @reservation.save
-      Car.set_status(params[:car_id],"R")
+      Car.set_status(params[:reservation][:car_id],"R")
 
       flash.now[:success] = 'Reservation created successfully.'
       redirect_to @reservation
