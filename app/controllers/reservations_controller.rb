@@ -31,6 +31,7 @@ class ReservationsController < ApplicationController
   def create
     @reservation = Reservation.new(reservation_params)
     car_status("R")
+    begin
     if @reservation.save
       flash.now[:success] = 'Reservation created successfully.'
       redirect_to @reservation
@@ -39,8 +40,9 @@ class ReservationsController < ApplicationController
       redirect_to cars_path
     end
     rescue ActiveRecord::RecordNotUnique => e
-        flash.now[:danger] = 'Cannot reserve!'
-        redirect_to cars_path
+      flash.now[:danger] = 'Cannot reserve!'
+      redirect_to cars_path
+    end
   end
 
   def update
