@@ -25,13 +25,15 @@ class ReservationsController < ApplicationController
     puts params
     puts "inside the settetr method"
     # car = Car.find(params[:reservation][:car_id])
-    Car.find(params[:reservation][:car_id]).update(:status => status)
+  #  Car.find(params[:reservation][:car_id]).update(:status => status)
   end
 
   def create
     @reservation = Reservation.new(reservation_params)
-    car_status("R")
+
     if @reservation.save
+      Car.find(params[:reservation][:car_id]).update(:status => status)
+      #car_status("R")
       flash.now[:success] = 'Reservation created successfully.'
       redirect_to @reservation
     else
@@ -72,7 +74,6 @@ class ReservationsController < ApplicationController
   def return
      cancel
   end
-
 
   private
   def set_reservation

@@ -1,7 +1,7 @@
 class CarsController < ApplicationController
 
   def index
-    if session[:user_type] == 'admin'
+    if is_admin?
       @cars =  Car.all
     else
        @cars = Car.where(:status => "A")
@@ -23,6 +23,10 @@ class CarsController < ApplicationController
     end
   end
   def new
+    if is_customer?
+      redirect_to unauthorized_show_path
+    end
+
   end
 
 

@@ -1,4 +1,4 @@
-class ApplicationController < ActionController::Base
+class  ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def sign_in(user_id, user_type)

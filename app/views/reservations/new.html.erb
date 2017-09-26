@@ -1,4 +1,4 @@
-<h1>Reserve a car!</h1>
+<h1>Reserve a Car</h1>
 <%= form_with scope: :reservation, url: reservations_path, local: true do |form| %>
 
   <% if session[:user_type] == 'admin' %>
