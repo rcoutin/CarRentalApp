@@ -2,10 +2,13 @@ class CarsController < ApplicationController
 
   def index
     if session[:user_type] == 'admin'
-      @cars =  Car.search(params[:search])
+      @cars =  Car.all
     else
        @cars = Car.where(:status => "A")
+
     end
+
+    @cars = @cars.search(params[:search])
   end
 
   def show
