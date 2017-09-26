@@ -1,12 +1,15 @@
 <h1>Edit Reservation</h1>
 <%= form_with scope: :reservation, url: reservation_path, method: :put, local: true do |form| %>
 
-    <%= form.hidden_field :customer_id, value: session[:current_user] %>
+  <%= form.hidden_field :customer_id, value: session[:current_user] %>
 
-  <p>
-    <%= form.label :car_id %>:
-    <%= form.text_field :car_id %>
-  </p>
+  <% if session[:user_type]=='admin' %>
+    <p>
+      <%= form.label :car_id %>:
+      <%= form.text_field :car_id %>
+    </p>
+  <% end %>
+
 
   <p>
     <%= form.label :from_time %>:
