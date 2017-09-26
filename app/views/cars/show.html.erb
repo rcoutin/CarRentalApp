@@ -1,1 +1,29 @@
 <h1> This is a  <%= @car.manufacturer %> <%= @car.model %></h1>
+<h4>
+<%= form_with scope: :cars, url: cars_path, local: true do |form| %>
+  <p>
+    <%= form.label :manufacturer %>:
+    <%= @car.manufacturer %>
+  </p>
+
+  <p>
+    <%= form.label :model %>:
+    <%= @car.model %>
+  </p>
+
+  <p>
+    <%= form.label :style %>:
+    <%= @car.style %>
+  </p>
+
+  <p>
+    <%= form.label :location %>:
+    <%= @car.location %>
+  </p>
+
+  <p>
+    <%= form.label :rate %>:
+    <%= @car.rate %>
+  </p>
+<% end %>
+</h4>
