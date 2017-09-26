@@ -1,4 +1,4 @@
-<h1>Reserve a car!</h1>
+<h1>Reserve a Car</h1>
 <%= form_with scope: :reservation, url: reservations_path, local: true do |form| %>
 
   <% if !is_customer? %>
@@ -13,6 +13,7 @@
   <p>
     <%= form.hidden_field :car_id, value: params[:car_id] %>
     <%= form.label :car_id %>:
+    <%= params[:car_manufacturer] %>
     <%= params[:car_model] %>
   </p>
 
