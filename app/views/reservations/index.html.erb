@@ -16,11 +16,11 @@
       <td><%= reservation.to_time %></td>
       <td><%= link_to 'Edit', [:edit, reservation] %></td>
       <td><%= params[reservation.car_id] %></td>
-      <% if params[reservation.car_id] == "R" %>
+    <% if params[reservation.car_id] == "R" %>
           <td><%= link_to 'Cancel', reservations_cancel_path(:car_id => reservation.car_id, :reservation_id => reservation.id ) %></td>
-          <td><%= link_to 'Checkout', [:edit, reservation] %></td>
-      <% elsif params[reservation.car_id] == "C"  %>
-          <td><%= link_to 'Return', [:edit, reservation] %></td>
+          <td><%= link_to 'Checkout', reservations_checkout_path(:car_id => reservation.car_id, :reservation_id => reservation.id ) %></td>
+    <% elsif params[reservation.car_id] == "C"  %>
+          <td><%= link_to 'Return', reservations_return_path(:car_id => reservation.car_id, :reservation_id => reservation.id ) %></td>
     <% end %>
 
 
