@@ -4,15 +4,12 @@ class ReservationsController < ApplicationController
   def index
 
     if session[:user_type] == 'admin'
-
-    @reservations = Reservation.all
+      @reservations = Reservation.all
       else
       @reservations = Reservation.where(:customer_id => session[:current_user])
       @cars = Car.joins("INNER JOIN reservations ON cars.id = reservations.car_id").select(:id, :status)
       @cars.each { |x| params[x.id.to_s] = x.status}
-      puts params
-
-      end
+    end
   end
   def show
     @reservation = Reservation.find(params[:id])
@@ -24,29 +21,16 @@ class ReservationsController < ApplicationController
     # @reservation.to_time = Time.now.strftime("%FT%T")
   end
 #Set the status of the car to R when a user reserves it
-  def car_status=(status)
-    car = Car.find(params[:reservation][:car_id])
-    Car.update(:status => status)
+  def car_status(status)
+    puts params
+    puts "inside the settetr method"
+    # car = Car.find(params[:reservation][:car_id])
+    Car.find(params[:reservation][:car_id]).update(:status => status)
   end
 
   def create
     @reservation = Reservation.new(reservation_params)
-    car_status = "R"
-    begin
-      respond_to do |process|
-        if @reservation.save
-          process.html{ redirect_to @reservation, notice: 'Reservation created successfully.' }
-          process.json{ render :show, status: created, location: @reservation }
-        else
-          process.html{ render :new }
-          process.json{ render json: @reservation.errors, status: unprocessable_entity }
-        end
-      end
-    rescue ActiveRecord::RecordNotUnique => e
-      respond_to do |process|
-        process.html{ render :new, notice: 'Cannot reserve!'}
-        process.json{ render json: @reservation.errors, status: unprocessable_entity }
-      end
+    car_status("R")
     if @reservation.save
       flash.now[:success] = 'Reservation created successfully.'
       redirect_to @reservation
@@ -57,7 +41,6 @@ class ReservationsController < ApplicationController
     rescue ActiveRecord::RecordNotUnique => e
         flash.now[:danger] = 'Cannot reserve!'
         redirect_to cars_path
-    
   end
 
   def update
@@ -76,19 +59,18 @@ class ReservationsController < ApplicationController
   end
 #checking out the car
   def checkout
-    car_status  = "C"
+    car_status("C")
   end
 #cancel the reservation
   def cancel
-
-    car_status = "A"
+    puts params
+    Reservation.destroy(params[:reservation_id])
+    Car.find(params[:car_id]).update(:status => "A")
+    redirect_to reservations_path
+    # car_status("A")
   end
 
-  def car_status
-
-  end
   private
-
   def set_reservation
     @reservation = Reservation.find { params[:id]  }
   end

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'unauthorized/show'
   get 'application/sign_out'
+  get 'reservations/cancel'
 
   resources :customers
   resources :login, only: [:new, :create], as: :login
