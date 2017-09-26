@@ -3,7 +3,7 @@
 <%= form_tag(cars_path, method: :get) do %>
   Search:
   <%= text_field_tag :search, params[:search] %>
-  <%= submit_tag 'Search', name: nil %>
+  <%= submit_tag 'Search', name: nil , :class => "btn btn-success"%>
 <% end %>
 
 <table class="table table-striped">
@@ -26,8 +26,8 @@
       <td><%= car.location %></td>
       <td><%= car.rate %></td>
       <td><%= car.status %></td>
-      <td><%= link_to 'Reserve', new_reservation_path(:car_id => car.id, :car_model => car.model) %></td>
-      <td><%= link_to 'Show', car_path(car.id) %></td>
+      <td><%= link_to 'Reserve', new_reservation_path(:car_id => car.id, :car_model => car.model) , :class => "btn btn-success"%></td>
+      <td><%= link_to 'Show', car_path(car.id), :class => "btn btn-info"%></td>
     </tr>
 <% end %>
 </table>
