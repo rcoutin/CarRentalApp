@@ -2,10 +2,9 @@ class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
 
   def index
-
     if !is_customer?
       @reservations = Reservation.all
-      else
+    else
       @reservations = Reservation.where(:customer_id => session[:current_user])
       @cars = Car.joins("INNER JOIN reservations ON cars.id = reservations.car_id").select(:id, :status)
       @cars.each { |x| params[x.id.to_s] = x.status}
