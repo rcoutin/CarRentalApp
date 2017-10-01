@@ -1,4 +1,8 @@
 class AdminsController < ApplicationController
+  def index
+    @admins = Admin.all
+  end
+
   def show
     if check_authority && !is_customer?
       @admin = Admin.find(session[:current_user])
