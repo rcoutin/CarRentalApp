@@ -27,6 +27,20 @@ class AdminsController < ApplicationController
     end
   end
 
+  def edit
+    @admin = Admin.find(session[:current_user])
+  end
+
+  def update
+    @admin = Admin.find(session[:current_user])
+
+    if @admin.update_attributes(admin_params)
+      redirect_to @admin
+    else
+      render plain: params[:admin].inspect
+    end
+  end
+
   private
   def admin_params
     params.require(:admin).permit(:first_name, :last_name, :email, :password, :is_super_admin)

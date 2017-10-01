@@ -1,0 +1,26 @@
+<h1>Edit Details</h1>
+<%= form_with scope: :admin, url: admin_path, method: :put, local: true do |form| %>
+  <p>
+    <%= form.label :first_name %><br>
+    <%= form.text_field :first_name %>
+  </p>
+
+  <p>
+    <%= form.label :last_name %><br>
+    <%= form.text_field :last_name %>
+  </p>
+
+  <p>
+    <%= form.label :email %><br>
+    <%= @admin.email %>
+  </p>
+
+  <p>
+    <%= form.label :password %><br>
+    <%= password_field(:admin, :password) %>
+  </p>
+
+  <p>
+    <%= form.submit "Save", :class => "btn btn-primary"%>
+  </p>
+<% end %>
