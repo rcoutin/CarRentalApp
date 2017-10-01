@@ -27,7 +27,7 @@
       <td><%= car.rate %></td>
       <td><%= car.status %></td>
       <td><%= link_to 'Reserve', new_reservation_path(:car_id => car.id, :car_model => car.model, :car_manufacturer => car.manufacturer) , :class => "btn btn-success"%></td>
-      <td><%= link_to 'Show', car_path(car.id), :class => "btn btn-info"%></td>
+      <td><%= link_to 'Show', car_path(:id => car.id), :class => "btn btn-info"%></td>
     </tr>
 <% end %>
 </table>

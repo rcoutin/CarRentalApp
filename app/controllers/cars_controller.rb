@@ -5,9 +5,7 @@ class CarsController < ApplicationController
       @cars =  Car.all
     else
        @cars = Car.where(:status => "A")
-
     end
-
     @cars = @cars.search(params[:search])
   end
 
@@ -28,8 +26,6 @@ class CarsController < ApplicationController
     end
 
   end
-
-
 
   def edit
 
