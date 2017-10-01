@@ -27,28 +27,20 @@ class ReservationsController < ApplicationController
     begin
     if @reservation.save
       Car.set_status(params[:reservation][:car_id],"R")
-
-      flash.now[:success] = 'Reservation created successfully.'
-      redirect_to @reservation
+      redirect_to @reservation, :flash => { :success => 'Reserved' }
     else
-      flash.now[:danger] = "Wrong Entries."
-      redirect_to cars_path
+      redirect_to cars_path, :flash => { :danger => "Please enter correct values while reserving" }
     end
     rescue ActiveRecord::RecordNotUnique => e
-      flash.now[:danger] = 'Cannot reserve!'
-      redirect_to cars_path
+      redirect_to cars_path, :flash => { :danger => "Reservation already present" }
     end
   end
 
   def update
-    respond_to do |process|
       if @reservation.update(reservation_params)
-        process.html{ redirect_to @reservation, notice: 'Reservation updated.' }
-        process.json{ render :show, status: ok, location: @reservation }
-        else
-          process.html{ render :edit }
-          process.json{ render json: @reservation.errors, status: unprocessable_entity }
-        end
+        redirect_to @reservation, :flash => { :success => 'Reservation successfulyl updated' }
+      else
+        redirect_to @reservation, :flash => { :danger => 'Problem in updating' }
       end
   end
 

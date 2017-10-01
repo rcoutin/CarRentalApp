@@ -15,8 +15,7 @@ class AdminsLoginController < ApplicationController
       end
       redirect_to admin
     else
-      flash[:danger] = 'Invalid email/password combination' # Not quite right!
-      render 'new'
+      redirect_to new_admins_login_path, :flash => { :danger => "Incorrect username and password" }
     end
   end
 end

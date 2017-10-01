@@ -14,7 +14,6 @@ class  ApplicationController < ActionController::Base
   def sign_out
   	session[:current_user] = -1
   	session[:user_type] = false
-  	puts "Wrong redirection possible here"
   	redirect_to new_login_path
   end
   helper_method :sign_out
