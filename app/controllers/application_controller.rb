@@ -50,7 +50,7 @@ class  ApplicationController < ActionController::Base
   helper_method :is_customer?
 
   def is_super_admin?
-    if  session[:user_type] == "super_admin"
+    if session[:user_type] == "super_admin"
       return true
     end
     return false
