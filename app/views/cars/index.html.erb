@@ -27,6 +27,9 @@
       <td><%= car.rate %></td>
       <td><%= car.status %></td>
       <td><%= link_to 'Reserve', new_reservation_path(:car_id => car.id, :car_model => car.model, :car_manufacturer => car.manufacturer) , :class => "btn btn-success"%></td>
+      <%= if is_admin? %>
+      <td><%= link_to 'Edit', edit_car_path(:id => car.id) , :class => "btn btn-primary"%>
+      <%= end %>
       <td><%= link_to 'Show', car_path(:id => car.id), :class => "btn btn-info"%></td>
     </tr>
 <% end %>

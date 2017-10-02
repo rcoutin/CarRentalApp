@@ -1,3 +1,4 @@
 <h1> Welcome, <%= @admin.first_name %>!</h1>
+<%= link_to 'View Cars', cars_path , :class => "btn btn-success"%>
 <%= link_to 'Edit personal details', edit_admin_path , :class => "btn btn-primary"%>
 <%= link_to 'Sign Out', application_sign_out_path , :class => "btn btn-danger pull-right"%><br>
