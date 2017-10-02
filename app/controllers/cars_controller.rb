@@ -12,6 +12,14 @@ class CarsController < ApplicationController
   def show
     @car = Car.find(params[:id])
   end
+
+  def destroy
+    Car.destroy(params[:id])
+    flash.now[:danger] = "Car has been deleted"
+    @cars = index
+    redirect_to cars_path
+
+end
   def create
     @car = Car.new(car_params)
     if @car.save
@@ -44,6 +52,5 @@ class CarsController < ApplicationController
   private
   def car_params
     params.require(:cars).permit(:manufacturer, :model, :license_number, :status, :style, :rate,:location, :search)
-
   end
 end

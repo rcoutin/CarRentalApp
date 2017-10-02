@@ -3,7 +3,7 @@
 
   <%= form.hidden_field :customer_id, value: session[:current_user] %>
 
-  <% if session[:user_type]=='admin' %>
+  <% if is_admin? %>
     <p>
       <%= form.label :car_id %>:
       <%= form.text_field :car_id %>
