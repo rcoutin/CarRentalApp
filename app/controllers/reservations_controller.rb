@@ -29,7 +29,9 @@ class ReservationsController < ApplicationController
       Car.set_status(params[:reservation][:car_id],"R")
       redirect_to @reservation, :flash => { :success => 'Reserved' }
     else
-      redirect_to cars_path, :flash => { :danger => "Please enter correct values while reserving" }
+      #redirect_to cars_path, :flash => { :danger => "Please enter correct values while reserving" }
+      flash.now[:danger] = "Please enter correct values while reserving" 
+      render action: "new"
     end
     rescue ActiveRecord::RecordNotUnique => e
       redirect_to cars_path, :flash => { :danger => "Reservation already present" }

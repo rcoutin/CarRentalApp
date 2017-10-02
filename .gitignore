@@ -29,3 +29,4 @@ Gemfile.lock
 Gemfile.lock
 *.lock
 .vscode/settings.json
+.vscode/tasks.json
