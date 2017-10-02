@@ -1,7 +1,7 @@
 <h1>Cars</h1>
 
-<%= form_tag(cars_path, method: :get) do %>
 <td><%=link_to 'Add', new_car_path() , :class=>"btn btn-success"%></td>
+<%= form_tag(cars_path, method: :get) do %>
   Search:
   <%= text_field_tag :search, params[:search] %>
   <%= submit_tag 'Search', name: nil , :class => "btn btn-success"%>
@@ -28,13 +28,10 @@
       <td><%= car.status %></td>
       <td><%= link_to 'Details', car_path(:id => car.id), :class => "btn btn-info"%></td>
       <td><%= link_to 'Reserve', new_reservation_path(:car_id => car.id, :car_model => car.model, :car_manufacturer => car.manufacturer) , :class => "btn btn-success"%></td>
-      <%# <% if is_admin? %> %>
+      <% if is_admin? %>
        <td> <%= link_to 'Delete' , car_path(:id => car.id, :status => car.status), method: :delete , :class => "btn btn-danger"%><td>
-      <%# <% end %> %>  
+      <% end %>
       <td>
     </tr>
 <% end %>
 </table>
-
-<!--
-new_reservation_path(:car_id => car.id)-->
