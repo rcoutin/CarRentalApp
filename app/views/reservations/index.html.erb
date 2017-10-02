@@ -3,7 +3,7 @@
 <table class="table table-striped">
   <tr>
     <th>User ID</th>
-    <th>Car ID</th>
+    <th>Car Name</th>
     <th>Reserved From</th>
     <th>Reserved Till</th>
     <th></th>
@@ -14,9 +14,9 @@
   <% @reservations.each do |reservation| %>
     <tr>
 
-      
+
       <td><%= reservation.customer_id %></td>
-      <td><%= reservation.car_id %></td>
+      <td><%= reservation.car.manufacturer %> <%= reservation.car.model %></td>
       <td><%= reservation.from_time  %></td>
       <td><%= reservation.to_time %></td>
       <td><%= link_to 'Edit', [:edit, reservation] , :class => "btn btn-info"%></td>
@@ -25,7 +25,7 @@
             <td><%= link_to 'Cancel', reservations_cancel_path(:car_id => reservation.car_id, :reservation_id => reservation.id ), :class => "btn btn-danger" %></td>
             <td><%= link_to 'Checkout', reservations_checkout_path(:car_id => reservation.car_id, :reservation_id => reservation.id ) , :class => "btn btn-success"%></td>
       <% elsif params[reservation.car_id.to_s] == "C"  %>
-            <td><%= link_to 'Return', reservations_return_path(:car_id => reservation.car_id, :reservation_id => reservation.id ) , :class => "btn btn-primary"%></td>    
+            <td><%= link_to 'Return', reservations_return_path(:car_id => reservation.car_id, :reservation_id => reservation.id ) , :class => "btn btn-primary"%></td>
       <% end %>
 
     </tr>
