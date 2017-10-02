@@ -8,8 +8,12 @@ class CustomersController < ApplicationController
   end
 
   def show
+
+    if is_admin?
+      
+
     if check_authority
-      @customer = Customer.find(session[:current_user])
+      @customer = Customer.find(current_user)
     end
   end
 
@@ -27,11 +31,11 @@ class CustomersController < ApplicationController
   end
 
   def edit
-    @customer = Customer.find(session[:current_user])
+    @customer = Customer.find(current_user)
   end
 
   def update
-    @customer = Customer.find(session[:current_user])
+    @customer = Customer.find(current_user)
 
     if @customer.update_attributes(customer_params)
       redirect_to @customer

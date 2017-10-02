@@ -1,0 +1,37 @@
+<%= form_with scope: :cars, url: cars_path, local: true do |form| %>
+    <p>
+      <%= form.label :manufacturer %><br>
+      <%= form.text_field :manufacturer %>
+    </p>
+
+    <p>
+      <%= form.label :model %><br>
+      <%= form.text_field :model %>
+    </p>
+    <p>
+      <%= form.label :license_number %><br>
+      <%= form.text_field :license_number %>
+    </p>
+
+    <p>
+      <%= form.label :style %><br>
+      <%= form.select :style, ["Sedan", "Coupe", "SUV"] %>
+    </p>
+    <p>
+      <%= form.label :status %><br>
+      <%= form.select :status, [["Available","A"], ["Reserved","R"], ["Checked Out","C"]] %>
+    </p>
+
+    <p>
+      <%= form.label :location %><br>
+      <%= form.text_field :location %>
+    </p>
+
+    <p>
+      <%= form.label :rate %><br>
+      <%= form.text_field :rate %>
+    </p>
+    <p>
+      <%= form.submit "Save" , :class => "btn btn-success" %>
+    </p>
+<% end %>

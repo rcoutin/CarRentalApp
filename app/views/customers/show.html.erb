@@ -1,6 +1,6 @@
+<%= link_to 'My Profile', edit_customer_path , :class => "btn btn-primary pull-right"%>
+
+
 <h1> Welcome, <%= @customer.first_name %>!</h1>
 <%= link_to 'Reserve a car', cars_path , :class => "btn btn-success"%>
-<%= link_to 'Edit personal details', edit_customer_path , :class => "btn btn-primary"%>
-<% if is_customer? %>
-	<%= link_to 'Sign out', application_sign_out_path , :class => "btn btn-danger pull-right"%>
-<% end %>
+<%= link_to 'My Reservations', reservations_path , :class => "btn btn-primary" %>

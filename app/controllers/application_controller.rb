@@ -1,11 +1,19 @@
 class  ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-
   before_action :check_unauthorized_access
 
-  @@allowed_controllers = ["login", "admins_login"]
-  @@disallowed_actions = ["index", "show", "edit"]
+  @@allowed_controllers = ["login", "admins_login","customers"]
+  @@disallowed_actions = ["index", "edit"]
   @@admin_roles = ["admin","super_admin"]
+
+
+  def current_user
+    session[:current_user]
+  end
+
+  def user_type
+    session[:user_type]
+  end 
 
   def sign_in(user_id, user_type)
   	session[:current_user] = user_id
@@ -20,7 +28,7 @@ class  ApplicationController < ActionController::Base
   helper_method :sign_out
 
   def check_authority
-  	if session[:current_user] == -1
+  	if current_user == -1
   		redirect_to unauthorized_show_path
   		return false
   	end
@@ -28,21 +36,21 @@ class  ApplicationController < ActionController::Base
   end
 
   def logged_in
-    puts params[:action]
-  	if session[:current_user] && session[:current_user] != -1
+    
+  	if current_user && current_user != -1
   		return true
   	end
   	return false
   end
 
   def check_unauthorized_access
-    if !logged_in && !@@allowed_controllers.include?(params[:controller]) && @@disallowed_actions.include?(params[:action])
+   if !logged_in && !(@@allowed_controllers.include?(params[:controller]) && !@@disallowed_actions.include?(params[:action]))
       redirect_to new_login_path
     end
   end
 
   def is_customer?
-    if session[:user_type] == "customer"
+    if user_type == "customer"
       return true
     end
     return false
@@ -50,7 +58,7 @@ class  ApplicationController < ActionController::Base
   helper_method :is_customer?
 
   def is_super_admin?
-    if session[:user_type] == "super_admin"
+    if user_type == "super_admin"
       return true
     end
     return false
@@ -58,7 +66,7 @@ class  ApplicationController < ActionController::Base
   helper_method :is_super_admin?
 
   def is_admin?
-    if @@admin_roles.include?(session[:user_type])
+    if @@admin_roles.include?(user_type)
       return true
     end
     return false
