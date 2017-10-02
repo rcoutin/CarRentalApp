@@ -5,6 +5,7 @@ class  ApplicationController < ActionController::Base
 
   @@allowed_controllers = ["login", "admins_login"]
   @@disallowed_actions = ["index", "show", "edit"]
+  @@admin_roles = ["admin","super_admin"]
 
   def sign_in(user_id, user_type)
   	session[:current_user] = user_id
@@ -49,7 +50,7 @@ class  ApplicationController < ActionController::Base
   helper_method :is_customer?
 
   def is_super_admin?
-    if session[:user_type] == "super_admin"
+    if  session[:user_type] == "super_admin"
       return true
     end
     return false
@@ -57,7 +58,7 @@ class  ApplicationController < ActionController::Base
   helper_method :is_super_admin?
 
   def is_admin?
-    if session[:user_type] == "admin"
+    if @@admin_roles.include?(session[:user_type])
       return true
     end
     return false
