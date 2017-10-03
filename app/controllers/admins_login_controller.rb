@@ -13,6 +13,7 @@ class AdminsLoginController < ApplicationController
       else
       	sign_in admin.id, "admin"
       end
+  
       redirect_to admin
     else
       redirect_to new_admins_login_path, :flash => { :danger => "Incorrect username and password" }

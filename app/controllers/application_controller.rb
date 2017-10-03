@@ -6,11 +6,11 @@ class  ApplicationController < ActionController::Base
   @@disallowed_actions = ["index", "edit"]
   @@admin_roles = ["admin","super_admin"]
 
-
   def current_user
     session[:current_user]
   end
   helper_method :current_user
+  
   def user_type
     session[:user_type]
   end 
@@ -36,11 +36,7 @@ class  ApplicationController < ActionController::Base
   end
 
   def logged_in
-    
-  	if current_user && current_user != -1
-  		return true
-  	end
-  	return false
+  	(current_user && current_user != -1)? true:false
   end
 
   def check_unauthorized_access
@@ -50,26 +46,18 @@ class  ApplicationController < ActionController::Base
   end
 
   def is_customer?
-    if user_type == "customer"
-      return true
-    end
-    return false
+    user_type == "customer"? true:false
+  
   end
   helper_method :is_customer?
 
   def is_super_admin?
-    if user_type == "super_admin"
-      return true
-    end
-    return false
+    user_type == "super_admin" ? true:false
   end
   helper_method :is_super_admin?
 
   def is_admin?
-    if @@admin_roles.include?(user_type)
-      return true
-    end
-    return false
+    @@admin_roles.include?(user_type)? true:false
   end
   helper_method :is_admin?
 end
