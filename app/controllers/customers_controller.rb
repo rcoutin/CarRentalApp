@@ -9,8 +9,7 @@ class CustomersController < ApplicationController
 
   def show
 
-    if is_admin?
-      
+    # if is_admin?
 
     if check_authority
       @customer = Customer.find(current_user)
