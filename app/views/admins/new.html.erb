@@ -19,12 +19,9 @@
     <%= form.label :password %><br>
     <%= password_field(:admin, :password) %>
   </p>
-
-  <p>
-    <%= form.label :is_super_admin %><br>
-    <%= form.check_box :is_super_admin %>
-  </p>
-
+  <% if is_super_admin? %>
+  <p><%= form.check_box :is_super_admin %> <%= form.label :super_admin %><br></p>
+  <%end%>
   <p>
     <%= form.submit "Create Admin", :class => "btn btn-primary"%>
   </p>
