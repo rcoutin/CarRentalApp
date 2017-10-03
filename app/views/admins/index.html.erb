@@ -13,9 +13,9 @@
     <tr>
       <td><%= admin.first_name %></td>
       <td><%= admin.last_name %></td>
-      <td><%= admin.email%>
-      <td><%= (admin.is_super_admin== true ?'Super Admin':'Admin') %></td>
-      <td><%= link_to 'Show', edit_admin_path(:admin_id => admin.id) , :class => "btn btn-success"%></td>
+      <td><%= admin.email%></td>
+      <td><%= (admin.is_super_admin== true ? 'Super Admin':'Admin') %></td>
+      <td><%= link_to 'Edit', edit_admin_path(:id => admin.id) , :class => 'btn btn-success' %></td>
       <% if (admin.id!=current_user) &&  ( is_super_admin? ||  (is_admin? && admin.is_super_admin ==false)) %>
       <td><%= link_to 'Delete', admin_path(:id =>admin.id) ,method: :delete , :class => "btn btn-success"%></td>
       <% end %>

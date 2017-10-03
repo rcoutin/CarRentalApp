@@ -4,7 +4,7 @@ class LoginController < ApplicationController
       @customer = Customer.find(session[:current_user])
       redirect_to @customer
     end
-    if logged_in & !is_customer?
+    if logged_in & is_admin?
       @admin = Admin.find(session[:current_user])
       redirect_to @admin
     end

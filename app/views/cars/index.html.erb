@@ -2,6 +2,9 @@
  <% if is_admin? %>
 <td><%=link_to 'Add', new_car_path() , :class=>"btn btn-success"%></td>
 <%end%>
+ <% if is_customer? %>
+<td><%=link_to 'Suggest Car', new_car_path() , :class=>"btn btn-success"%></td>
+<%end%>
 <%= form_tag(cars_path, method: :get) do %>
   Search:
   <%= text_field_tag :search, params[:search] %>
@@ -26,7 +29,7 @@
       <td><%= car.license_number %></td>
       <td><%= car.location %></td>
       <td><%= car.rate %></td>
-      <td><%= car.status %></td>
+      <td><%= car_status(car.status).to_s %></td>
       <td><%= link_to 'Details', car_path(:id => car.id), :class => "btn btn-info"%></td>
       <td><%= link_to 'Reserve', new_reservation_path(:car_id => car.id, :car_model => car.model, :car_manufacturer => car.manufacturer) , :class => "btn btn-success"%></td>
       <% if is_admin? %>
