@@ -6,8 +6,6 @@ class ReservationsController < ApplicationController
       @reservations = Reservation.all
     else
       @reservations = Reservation.where(:customer_id => session[:current_user])
-      @cars = Car.joins("INNER JOIN reservations ON cars.id = reservations.car_id").select(:id, :status)
-      @cars.each { |x| params[x.id.to_s] = x.status}
     end
   end
   def show
