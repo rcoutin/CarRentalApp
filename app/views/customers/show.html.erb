@@ -1,6 +1,48 @@
+<% if is_customer? %>
 <%= link_to 'Edit Profile', edit_customer_path , :class => "btn btn-primary pull-right"%>
-
-
 <h1> Welcome, <%= @customer.first_name %>!</h1>
 <%= link_to 'Reserve a car', cars_path , :class => "btn btn-success"%>
 <%= link_to 'My Reservations', reservations_path , :class => "btn btn-primary" %>
+<% end %>
+
+<% if is_admin? %>
+  <%= form_with scope: :customer, url: customers_path, local: true do |form| %>
+    <h2>
+      <%= @customer.first_name %>
+      <%= @customer.last_name %>
+    </h2>
+
+    <h6>
+      <p>
+        <%= form.label :email %>:
+        <%= @customer.email %>
+      </p>
+      <p>
+        <%= form.label :license_number %>:
+        <%= @customer.license_number %>
+      </p>
+    </h6>
+    <table class="table table-striped">
+      <tr>
+        <th>Car Name</th>
+        <th>Reserved From</th>
+        <th>Reserved Till</th>
+        <th>Rate</th>
+        <th>Status</th>
+      </tr>
+  <tr>
+    <td><%= @customer.reservation.car.manufacturer %> <%= @customer.reservation.car.model %></td>
+    <td><%= @customer.reservation.from_time  %></td>
+    <td><%= @customer.reservation.to_time %></td>
+    <td><%= @customer.reservation.car.rate %></td>
+    <td><%= @customer.reservation.car.status %></td>
+    <td><%= link_to 'Edit', edit_reservation_path , :class => "btn btn-info"%></td>
+    <% if @customer.reservation.car.status == "R" %>
+        <td><%= link_to 'Cancel', reservations_cancel_path(:car_id => @customer.reservation.car_id, :reservation_id => @customer.reservation.id ), :class => "btn btn-danger" %></td>
+        <td><%= link_to 'Checkout', reservations_checkout_path(:car_id => @customer.reservation.car_id, :reservation_id => @customer.reservation.id ) , :class => "btn btn-success"%></td>
+    <% elsif @customer.reservation.car.status == "C"  %>
+        <td><%= link_to 'Return', reservations_return_path(:car_id => @customer.reservation.car_id, :reservation_id => @customer.reservation.id ) , :class => "btn btn-primary"%></td>
+    <% end %>
+  </tr>
+  <% end %>
+<% end %>

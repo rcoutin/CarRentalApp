@@ -8,13 +8,7 @@ class CustomersController < ApplicationController
   end
 
   def show
-
-   # if is_admin?
-      
-      @customer = Customer.find(current_user)
-
-    #if check_authority
-   # end
+    @customer = Customer.find(params[:id])
   end
 
   def new
