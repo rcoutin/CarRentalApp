@@ -32,7 +32,7 @@ class AdminsController < ApplicationController
   end
 
   def edit
-    @admin = Admin.find(session[:current_user])
+    @admin = Admin.find(params[:admin_id])
   end
 
   def update
