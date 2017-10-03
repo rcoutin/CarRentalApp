@@ -1,6 +1,6 @@
 class CustomersController < ApplicationController
   def index
-    if !is_customer?
+    if is_admin?
       @customers = Customer.all
     else
       redirect_to unauthorized_show_path
@@ -9,12 +9,12 @@ class CustomersController < ApplicationController
 
   def show
 
-    if is_admin?
+   # if is_admin?
       
-
-    if check_authority
       @customer = Customer.find(current_user)
-    end
+
+    #if check_authority
+   # end
   end
 
   def new

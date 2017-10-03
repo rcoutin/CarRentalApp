@@ -2,7 +2,7 @@ class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
 
   def index
-    if !is_customer?
+    if is_admin?
       @reservations = Reservation.all
     else
       @reservations = Reservation.where(:customer_id => session[:current_user])
