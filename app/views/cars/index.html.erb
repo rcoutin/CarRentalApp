@@ -28,7 +28,11 @@
       <td><%= car.rate %></td>
       <td><%= car.status %></td>
       <td><%= link_to 'Details', car_path(:id => car.id), :class => "btn btn-info"%></td>
+      <% if car.status == "A" %>
       <td><%= link_to 'Reserve', new_reservation_path(:car_id => car.id, :car_model => car.model, :car_manufacturer => car.manufacturer) , :class => "btn btn-success"%></td>
+      <% else %>
+      <td><%= link_to 'Notify', cars_path, :class => "btn btn-info" %></td>
+      <% end %>
       <% if is_admin? %>
       <td><%= link_to 'Edit', edit_car_path(:id => car.id) , :class => "btn btn-primary"%>
       <td> <%= link_to 'Delete' , car_path(:id => car.id, :status => car.status), method: :delete , :class => "btn btn-danger"%><td>
