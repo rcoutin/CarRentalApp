@@ -30,6 +30,7 @@
         <th>Rate</th>
         <th>Status</th>
       </tr>
+  <% if @customer.reservation != nil %>
   <tr>
     <td><%= @customer.reservation.car.manufacturer %> <%= @customer.reservation.car.model %></td>
     <td><%= @customer.reservation.from_time  %></td>
@@ -44,5 +45,6 @@
         <td><%= link_to 'Return', reservations_return_path(:car_id => @customer.reservation.car_id, :reservation_id => @customer.reservation.id ) , :class => "btn btn-primary"%></td>
     <% end %>
   </tr>
+  <% end %>
   <% end %>
 <% end %>

@@ -1,4 +1,4 @@
-<h1> This is a  <%= @car.manufacturer %> <%= @car.model %></h1>
+<h1><%= @car.manufacturer %> <%= @car.model %></h1>
 <h4>
 <%= form_with scope: :cars, url: cars_path, local: true do |form| %>
   <p>
