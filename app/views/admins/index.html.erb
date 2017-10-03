@@ -15,6 +15,9 @@
 
       <td><%= admin.is_super_admin%></td>
       <td><%= link_to 'Show', admin_path(admin) , :class => "btn btn-success"%></td>
+      <% if (admin.id!=current_user) &&  ( is_super_admin? ||  (is_admin? && admin.is_super_admin ==false)) %>
+      <td><%= link_to 'Delete', admin_path(:id =>admin.id) ,method: :delete , :class => "btn btn-success"%></td>
+      <% end %>
     </tr>
   <% end %>
 </table>

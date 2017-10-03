@@ -16,7 +16,7 @@ class CarsController < ApplicationController
   def destroy
     Car.destroy(params[:id])
     flash.now[:danger] = "Car has been deleted"
-    @cars = index
+  
     redirect_to cars_path
 
 end

@@ -10,7 +10,11 @@ class AdminsController < ApplicationController
       redirect_to unauthorized_show_path
     end
   end
-
+  def destroy
+    Admin.destroy(params[:id])
+    flash.now[:danger] = "Admin has been deleted"
+    redirect_to admins_path
+  end
   def new
     if is_customer?
       redirect_to unauthorized_show_path

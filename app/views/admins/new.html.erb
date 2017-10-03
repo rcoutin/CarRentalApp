@@ -1,5 +1,7 @@
 <h1>Create Admin</h1>
 <%= form_with scope: :admin, url: admins_path, local: true do |form| %>
+
+
   <p>
     <%= form.label :first_name %><br>
     <%= form.text_field :first_name %>
@@ -21,7 +23,9 @@
   </p>
   <% if is_super_admin? %>
   <p><%= form.check_box :is_super_admin %> <%= form.label :super_admin %><br></p>
-  <%end%>
+  <% else %>
+    <%= form.hidden_field :is_super_admin, value:false  %>
+ <%end%>
   <p>
     <%= form.submit "Create Admin", :class => "btn btn-primary"%>
   </p>
