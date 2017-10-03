@@ -10,7 +10,7 @@ class  ApplicationController < ActionController::Base
   def current_user
     session[:current_user]
   end
-
+  helper_method :current_user
   def user_type
     session[:user_type]
   end 

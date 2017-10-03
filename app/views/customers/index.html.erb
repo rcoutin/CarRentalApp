@@ -1,17 +1,19 @@
 <h1>Listing customers</h1>
 
-<table>
+<table class="table table-striped">
   <tr>
-    <th>First Name</th>
+  <th>First Name</th>
   <th>Last Name</th>
+  <th>Email</th>
   </tr>
 
 <% @customers.each do |customer| %>
     <tr>
       <td><%= customer.first_name %></td>
       <td><%= customer.last_name %></td>
-      <%= puts customer.id%>
+      <td><%= customer.email %></td>
       <td><%= link_to 'Show', customer_path(:id => customer.id) , :class => "btn btn-success"%></td>
+      <td><%= link_to 'Delete', customer_path(:id => customer.id), method: :delete, :class => "btn btn-success"%></td>
     </tr>
   <% end %>
 </table>
