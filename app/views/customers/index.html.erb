@@ -11,6 +11,7 @@
       <td><%= customer.first_name %></td>
       <td><%= customer.last_name %></td>
       <td><%= link_to 'Show', customer_path(customer) , :class => "btn btn-success"%></td>
+      <td><%= link_to 'Delete', customer_path(:id => customer.id), method: :delete, :class => "btn btn-success"%></td>
     </tr>
   <% end %>
 </table>
