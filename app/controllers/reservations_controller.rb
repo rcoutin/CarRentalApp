@@ -34,6 +34,14 @@ class ReservationsController < ApplicationController
           puts "A Set"
         end
       end
+
+      Rufus::Scheduler.singleton.at @reservation.to_time  + (4 * 60 * 60).seconds do
+        if(Car.find(params[:reservation][:car_id]).status == "C")
+          Reservation.destroy(@reservation.id)
+          Car.set_status(@reservation.car_id,"A")
+          puts "A Set"
+        end
+      end
       redirect_to @reservation, :flash => { :success => 'Reserved' }
     else
       #redirect_to cars_path, :flash => { :danger => "Please enter correct values while reserving" }
