@@ -36,7 +36,7 @@ class  ApplicationController < ActionController::Base
   end
 
   def logged_in
-  	(current_user && current_user != -1)? true:false
+  	current_user && current_user != -1
   end
 
   def check_unauthorized_access
@@ -46,18 +46,18 @@ class  ApplicationController < ActionController::Base
   end
 
   def is_customer?
-    user_type == "customer"? true:false
+    user_type == "customer"
   
   end
   helper_method :is_customer?
 
   def is_super_admin?
-    user_type == "super_admin" ? true:false
+    user_type == "super_admin"
   end
   helper_method :is_super_admin?
 
   def is_admin?
-    @@admin_roles.include?(user_type)? true:false
+    @@admin_roles.include?(user_type)
   end
   helper_method :is_admin?
 end

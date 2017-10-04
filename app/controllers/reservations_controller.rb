@@ -2,6 +2,7 @@ require 'rubygems'
 
 class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
+  #after_action :create_history
 
   def index
     if is_admin?
@@ -19,8 +20,7 @@ class ReservationsController < ApplicationController
     # @reservation.from_time = Time.now.strftime("%FT%T")
     # @reservation.to_time = Time.now.strftime("%FT%T")
   end
-
-
+  
   def create
     @reservation = Reservation.new(reservation_params)
 
@@ -70,10 +70,9 @@ class ReservationsController < ApplicationController
   end
 #cancel the reservation
   def cancel
-    Reservation.destroy(params[:reservation_id])
-    #Car.find(params[:car_id]).update(:status => "A")
-    Car.set_status(params[:car_id],"A")
-
+   Reservation.destroy(params[:reservation_id])
+    Car.find(params[:car_id]).update(:status => "A")
+    create_history(params)
     redirect_to reservations_path
   end
 
@@ -90,10 +89,19 @@ class ReservationsController < ApplicationController
     params.require(:reservation).permit(:customer_id, :car_id, :from_time, :to_time)
   end
 
-  def check_status(car_id)
-    if(Car.find(car_id) == "R")
-      Car.set_status(car_id,"A")
-    end
+
+  #create a reservation history after cancellation, deletion and completion
+  def create_history(res_map)
+    puts res_map
+    @reservation_history = ReservationHistory.new(reservation_id: res_map[:reservation_id],
+    customer_id: res_map[:customer_id],
+    car_id: res_map[:car_id],
+    from_time: res_map[:from_time],
+    to_time: res_map[:to_time],)
+    @reservation_history.save
   end
+
+
+
 
 end

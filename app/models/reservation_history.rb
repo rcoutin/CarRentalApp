@@ -1,0 +1,2 @@
+class ReservationHistory < ApplicationRecord
+end

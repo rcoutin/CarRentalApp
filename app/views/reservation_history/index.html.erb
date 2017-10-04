@@ -1,0 +1,22 @@
+<h1>Past Reservations</h1>
+
+<table class="table table-striped">
+  <tr>
+  <th>Reservation Id</th>
+    <th>Customer ID</th>
+    <th>Car Id</th>
+    <th>Reserved From</th>
+    <th>Reserved Till</th>
+  </tr>
+  <% @reservation_hist.each do |hist| %>
+    <tr>
+    <td><%= hist.reservation_id %></td>
+      <td><%= hist.customer_id %></td>
+            <td><%= hist.car_id %></td>
+      <td><%= hist.from_time  %></td>
+      <td><%= hist.to_time %></td>
+     
+
+    </tr>
+  <% end %>
+</table>
