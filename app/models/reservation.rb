@@ -13,11 +13,9 @@ class Reservation < ApplicationRecord
       errors.add(:from_time, 'Invalid time entry.')
     elsif to_time == nil
       errors.add(:to_time, 'Invalid time entry.')
-    elsif from_time.today?
-      errors.add(:from_time, 'Cannot reserve on the same day.')
- 		elsif from_time - DateTime.current < 0
+ 		elsif ((from_time - DateTime.now) + ( 4 * 60 * 60 )) < 0
  			errors.add(:from_time, 'Time cannot be in the past.')
- 		elsif (from_time - DateTime.current) / 24 / 60 / 60 > 7
+ 		elsif (from_time - DateTime.now) / 24 / 60 / 60 > 7
  			errors.add(:from_time, 'The reservation time has to be in the next one week.')
   	elsif to_time < from_time
   		errors.add(:to_time, 'The time cannot be before the initial reservation time.')
