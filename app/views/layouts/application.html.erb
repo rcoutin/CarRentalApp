@@ -10,11 +10,16 @@
   </head>
 
 
-<%= link_to 'Home', root_path,:class=>"btn btn-primary pull-left"%>
-
-<%= link_to 'Sign Out', application_sign_out_path , :class => "btn btn-danger pull-right"%><br>
+<br>
 
   <body>
+    <% if logged_in %>
+      <div class="container navbar">
+        <%= link_to 'OnePlus Car Rentals', root_path,:class=>"pull-left navbar-header"%>
+
+        <%= link_to 'Sign Out', application_sign_out_path , :class => "btn btn-danger pull-right"%>
+      </div>
+    <% end %>
   	<div class="container">
       
       <%= flash_messages %>

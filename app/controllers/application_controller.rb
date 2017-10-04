@@ -38,6 +38,7 @@ class  ApplicationController < ActionController::Base
   def logged_in
   	current_user && current_user != -1
   end
+  helper_method :logged_in
 
   def check_unauthorized_access
    if !logged_in && !(@@allowed_controllers.include?(params[:controller]) && !@@disallowed_actions.include?(params[:action]))
