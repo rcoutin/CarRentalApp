@@ -43,6 +43,9 @@ end
 
   def edit
     @car = Car.find(params[:id])
+    if @car.status == "R" || @car.status == "C"
+      redirect_to cars_path, :flash => {:danger => "Cannot edit a car while it is reserved or checked out"}
+    end
   end
 
   private
