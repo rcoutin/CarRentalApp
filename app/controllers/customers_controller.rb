@@ -19,7 +19,7 @@ class CustomersController < ApplicationController
 
     if @customer.save
       flash.now[:info] = "You have successfully signed up!"      
-      redirect_to new_login_path
+      redirect_to new_login_path, :flash => { :success => 'Successfully signed up!' }
     else
       render plain: params[:customer].inspect
     end

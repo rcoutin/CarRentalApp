@@ -25,7 +25,7 @@ class AdminsController < ApplicationController
     @admin = Admin.new(admin_params)
 
     if @admin.save
-      redirect_to new_login_path
+      redirect_to new_login_path, :flash => { :success => 'Successfully signed up!' }
     else
       render plain: params[:admin].inspect
     end

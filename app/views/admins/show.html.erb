@@ -3,7 +3,8 @@
 
 <h1> Welcome, <%= @admin.first_name %>!</h1>
 
-<%= link_to 'Manage Cars', cars_path , :class => "btn btn-primary"%><br>
-<%= link_to 'Manage Customers', customers_path , :class => "btn btn-primary"%><br>
-<%= link_to 'Manage Reservations', reservations_path , :class => "btn btn-primary"%><br>
-<%= link_to 'Manage Admins', admins_path() , :class => "btn btn-primary"%><br>
+<%= link_to 'Manage Cars', cars_path , :class => "btn btn-success"%><br><br>
+<%= link_to 'Manage Customers', customers_path , :class => "btn btn-info"%><br><br>
+<%= link_to 'Manage Reservations', reservations_path , :class => "btn btn-warning"%><br><br>
+<%= link_to 'Manage Admins', admins_path() , :class => "btn btn-danger"%><br><br>
+<%= link_to 'Manage Approvals', car_approvals_path , :class => "btn btn-primary"%><br><br>

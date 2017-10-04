@@ -21,7 +21,7 @@ end
     if @car.save
       redirect_to @car
     else
-      render plain: params[:cars]
+      redirect_to admins_path, :flash => { :danger => 'Adding a car failed. Try again.' }
     end
   end
   def new
