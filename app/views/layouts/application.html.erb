@@ -15,9 +15,13 @@
   <body>
     <% if logged_in %>
       <div class="container navbar">
-        <%= link_to 'OnePlus Car Rentals', root_path,:class=>"pull-left navbar-header"%>
-
-        <%= link_to 'Sign Out', application_sign_out_path , :class => "btn btn-danger pull-right"%>
+        <div class="pull-left">
+          <%= link_to 'OnePlus Car Rentals', root_path,:class=>"navbar-header"%>
+        </div>
+        <div class="pull-right">
+          <%= get_user_name %> &nbsp; &nbsp;
+          <%= link_to 'Sign Out', application_sign_out_path , :class => "btn btn-danger"%>
+        </div>
       </div>
     <% end %>
   	<div class="container">
