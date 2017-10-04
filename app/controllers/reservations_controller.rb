@@ -1,3 +1,5 @@
+require 'rubygems'
+
 class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
 
@@ -25,6 +27,13 @@ class ReservationsController < ApplicationController
     begin
     if @reservation.save
       Car.set_status(params[:reservation][:car_id],"R")
+      Rufus::Scheduler.singleton.at @reservation.from_time + (4 * 60 * 60).seconds + 30.minutes do
+        if(Car.find(params[:reservation][:car_id]).status == "R")
+          Reservation.destroy(@reservation.id)
+          Car.set_status(@reservation.car_id,"A")
+          puts "A Set"
+        end
+      end
       redirect_to @reservation, :flash => { :success => 'Reserved' }
     else
       #redirect_to cars_path, :flash => { :danger => "Please enter correct values while reserving" }
@@ -71,6 +80,12 @@ class ReservationsController < ApplicationController
 
   def reservation_params
     params.require(:reservation).permit(:customer_id, :car_id, :from_time, :to_time)
+  end
+
+  def check_status(car_id)
+    if(Car.find(car_id) == "R")
+      Car.set_status(car_id,"A")
+    end
   end
 
 end
