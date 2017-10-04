@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Dear, <%= @user.first_name %>. This is for your information.</h1>
+    <p>
+      We are sorry to say that your request for the car "<%= @car.manufacturer %> <%= @car.model %>" has been disapproved.
+      Thank you for your valuable suggestions.
+    </p>
+    <p>
+      To reserve a car that is available, just follow this link: <%= @url %>.
+    </p>
+    <p>Thank you for using One Plus Car Rental Service!</p>
+  </body>
+</html>
