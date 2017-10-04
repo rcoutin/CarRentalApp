@@ -30,3 +30,6 @@ Gemfile.lock
 *.lock
 .vscode/settings.json
 .vscode/tasks.json
+
+# Ignore application configuration
+/config/application.yml

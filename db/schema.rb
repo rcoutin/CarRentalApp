@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171004022823) do
+ActiveRecord::Schema.define(version: 20171004043755) do
 
   create_table "admins", force: :cascade do |t|
     t.string "first_name"
@@ -19,6 +19,18 @@ ActiveRecord::Schema.define(version: 20171004022823) do
     t.string "password"
     t.string "password_digest"
     t.boolean "is_super_admin"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "car_approvals", force: :cascade do |t|
+    t.string "manufacturer"
+    t.string "model"
+    t.string "license_number"
+    t.string "status"
+    t.decimal "rate"
+    t.string "style"
+    t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
