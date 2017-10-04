@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20171004022823) do
-=======
-ActiveRecord::Schema.define(version: 20171004022818) do
->>>>>>> 5b44e00a93bfcd24ad15db876abd7b99e3b96902
 
   create_table "admins", force: :cascade do |t|
     t.string "first_name"
@@ -26,9 +22,6 @@ ActiveRecord::Schema.define(version: 20171004022818) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-# Could not dump table "b_admins" because of following StandardError
-#   Unknown type 'NUM' for column 'is_super_admin'
 
   create_table "cars", force: :cascade do |t|
     t.string "manufacturer"
@@ -55,17 +48,6 @@ ActiveRecord::Schema.define(version: 20171004022818) do
     t.float "rental_charge", default: 0.0
   end
 
-<<<<<<< HEAD
-  create_table "reservation_histories", force: :cascade do |t|
-    t.integer "reservation_id"
-    t.integer "customer_id"
-    t.integer "car_id"
-    t.datetime "from_time"
-    t.datetime "to_time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.decimal "total_charges", precision: 2
-=======
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer "priority", default: 0, null: false
     t.integer "attempts", default: 0, null: false
@@ -79,7 +61,17 @@ ActiveRecord::Schema.define(version: 20171004022818) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
->>>>>>> 5b44e00a93bfcd24ad15db876abd7b99e3b96902
+  end
+
+  create_table "reservation_histories", force: :cascade do |t|
+    t.integer "reservation_id"
+    t.integer "customer_id"
+    t.integer "car_id"
+    t.datetime "from_time"
+    t.datetime "to_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "total_charges", precision: 2
   end
 
   create_table "reservations", force: :cascade do |t|
