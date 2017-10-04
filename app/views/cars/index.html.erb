@@ -3,6 +3,7 @@
 <td><%=link_to 'Add', new_car_path() , :class=>"btn btn-success"%></td>
 <%end%>
  <% if is_customer? %>
+ 
 <td><%=link_to 'Suggest Car', new_car_path() , :class=>"btn btn-success"%></td>
 <%end%>
 <%= form_tag(cars_path, method: :get) do %>

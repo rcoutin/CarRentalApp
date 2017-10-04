@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :admins
   resources :cars
   resources :reservations
+  resources :reservation_history
 
   root 'login#new'
 end

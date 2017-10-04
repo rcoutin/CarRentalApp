@@ -1,6 +1,12 @@
 <h1><%= @car.manufacturer %> <%= @car.model %></h1>
 <h4>
 <%= form_with scope: :cars, url: cars_path, local: true do |form| %>
+  <% if is_admin? %>
+   <p>
+    <%= form.label  :CarID %>:
+    <%= @car.id %>
+  </p>
+   <% end %>
   <p>
     <%= form.label :manufacturer %>:
     <%= @car.manufacturer %>
@@ -26,4 +32,33 @@
     <%= @car.rate %>
   </p>
 <% end %>
+
+<% if is_admin? %>
+<h1>Past Reservations</h1>
+
+<table class="table table-striped">
+  <tr>
+  <th>Reservation Id</th>
+    <th>Customer ID</th>
+    <th>Car ID</th>
+    <th>Reserved From</th>
+    <th>Reserved Till</th>
+  </tr>
+  <% @reservation_hist.each do |hist| %>
+    <tr>
+    <td><%= hist.reservation_id %></td>
+      <td><%= hist.customer_id %></td>
+        <td><%= hist.car_id %></td>
+      <td><%= hist.from_time  %></td>
+    <td><%= hist.to_time %></td>
+     
+
+    </tr>
+  <% end %>
+</table>
+
+
+
+
+<%end%>
 </h4>
