@@ -1,7 +1,7 @@
 class AdminsLoginController < ApplicationController
 	def new
     if logged_in
-      @admin = Admin.find(session[:current_user])
+      @admin = Admin.find(current_user)
       redirect_to @admin
     end
   end

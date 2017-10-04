@@ -34,9 +34,9 @@
       <td><%= link_to 'Details', car_path(:id => car.id), :class => "btn btn-info"%></td>
       <td>
       <% if car.status == "A" %>
-      <%= link_to 'Reserve', new_reservation_path(:car_id => car.id, :car_model => car.model, :car_manufacturer => car.manufacturer) , :class => "btn btn-success"%>
+      <%= link_to 'Reserve', new_reservation_path(:car_id => car.id, :car_model => car.model,:car_manufacturer => car.manufacturer) ,  :class => "btn btn-success"%>
       <% elsif is_customer? %>
-      <%= link_to 'Notify', cars_path, :class => "btn btn-info" %>
+      <%= link_to 'Notify', notifications_path(:car_id => car.id, :customer_id => current_user),method: :post, :class => "btn btn-info" %>
       <% end %>
       </td>
       <% if is_admin? %>

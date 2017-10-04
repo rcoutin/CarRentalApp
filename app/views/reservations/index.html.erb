@@ -1,10 +1,11 @@
 <h1>Reservations</h1>
-  <td><%= link_to 'History', reservation_history_index_path(:current_user_from_page =>current_user),:class => "btn btn-success"%></td>
+  <td><%= link_to 'History', reservation_history_index_path(),:class => "btn btn-success"%></td>
 
 <table class="table table-striped">
   <tr>
     <% if is_admin? %>
     <th>Customer ID</th>
+    <th>Car ID</th>
     <% end %>
     <th>Car Name</th>
     <th>Reserved From</th>
@@ -14,12 +15,12 @@
     <th>Status</th>
     <% end %>
   </tr>
-  
 
   <% @reservations.each do |reservation| %>
     <tr>
       <% if is_admin? %>
       <td><u><%= link_to reservation.customer_id, customer_path(:id => reservation.customer_id) %></u></td>
+      <td><%=reservation.car.id %></td>
       <% end %>
       <td><%= reservation.car.manufacturer %> <%= reservation.car.model %></td>
       <td><%= reservation.from_time  %></td>

@@ -12,6 +12,6 @@ Rails.application.routes.draw do
   resources :cars
   resources :reservations
   resources :reservation_history
-
+  resources :notifications
   root 'login#new'
 end

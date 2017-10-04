@@ -5,10 +5,10 @@ class ReservationsController < ApplicationController
   #after_action :create_history
 
   def index
-    if is_admin?
+    if is_customer?
+    @reservations = Reservation.where(:customer_id => params[:res_for_customer])
+    elsif is_admin?
       @reservations = Reservation.all
-    else
-      @reservations = Reservation.where(:customer_id => session[:current_user])
     end
   end
   def show
@@ -70,7 +70,7 @@ class ReservationsController < ApplicationController
   end
 #cancel the reservation
   def cancel
-   Reservation.destroy(params[:reservation_id])
+    Reservation.destroy(params[:reservation_id])
     Car.find(params[:car_id]).update(:status => "A")
     create_history(params)
     redirect_to reservations_path
@@ -98,7 +98,10 @@ class ReservationsController < ApplicationController
     car_id: res_map[:car_id],
     from_time: res_map[:from_time],
     to_time: res_map[:to_time],)
-    @reservation_history.save
+    if !@reservation_history.save
+      flash.now[:danger] = "Could not save reservation history"
+  
+    end
   end
 
 

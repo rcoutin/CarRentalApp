@@ -1,7 +1,7 @@
 <h1>Edit Reservation</h1>
 <%= form_with scope: :reservation, url: reservation_path, method: :put, local: true do |form| %>
 
-  <%= form.hidden_field :customer_id, value: session[:current_user] %>
+  <%= form.hidden_field :customer_id, value: current_user %>
 
   <% if is_admin? %>
     <p>

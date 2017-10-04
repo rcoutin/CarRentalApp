@@ -8,15 +8,15 @@ def create
 end
 
 def show
-
-
 end
 
 def index
-if is_admin?
+if is_customer?
+        @reservation_hist= ReservationHistory.where(:customer_id => current_user)
+
+elsif is_admin?
         @reservation_hist=  ReservationHistory.all 
-else
-        @reservation_hist= ReservationHistory.where(:customer_id => params[:current_user_from_page])
+
 end
 end
 

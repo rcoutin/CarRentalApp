@@ -32,11 +32,11 @@ class AdminsController < ApplicationController
   end
 
   def edit
-    @admin = Admin.find(params[:admin_id])
+    @admin = Admin.find(params[:id])
   end
 
   def update
-    @admin = Admin.find(session[:current_user])
+    @admin = Admin.find(params[:id])
 
     if @admin.update_attributes(admin_params)
       redirect_to @admin

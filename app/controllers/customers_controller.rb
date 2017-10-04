@@ -26,8 +26,9 @@ class CustomersController < ApplicationController
   end
 
   def edit
-    @customer = Customer.find(current_user)
+    @customer = Customer.find(params[:id])
   end
+  
 def destroy
   Customer.destroy(params[:id])
   flash.now[:danger] = "The Customer has been deleted"
@@ -35,7 +36,7 @@ def destroy
 
 end
   def update
-    @customer = Customer.find(current_user)
+    @customer = Customer.find(params[:id])
 
     if @customer.update_attributes(customer_params)
       redirect_to @customer
