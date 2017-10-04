@@ -32,7 +32,32 @@ class ReservationsController < ApplicationController
         if(Car.find(params[:reservation][:car_id]).status == "R")
           Reservation.destroy(@reservation.id)
           Car.set_status(@reservation.car_id,"A")
-          puts "A Set"
+
+          current_time = ((DateTime.now).min).to_f / 60.0 + (DateTime.now).hour.to_f
+          from_time = ((DateTime.parse(params[:reservation][:from_time])).min).to_f / 60.0 + (DateTime.parse(params[:reservation][:from_time])).hour.to_f
+          total_time = current_time - from_time
+          charge_per_hour = (Car.find(params[:reservation][:car_id]).rate)
+          
+          @total_charge = total_time * charge_per_hour
+
+          @customer = Customer.find(params[:reservation][:customer_id])
+
+          @customer.increment('rental_charge', @total_charge.round(2))
+          
+          @reservation_history = ReservationHistory.new(reservation_id: params[:reservation][:reservation_id],
+          customer_id: params[:reservation][:customer_id],
+          car_id: params[:reservation][:car_id],
+          from_time: params[:reservation][:from_time],
+          to_time: DateTime.now,
+          total_charges: @total_charge.round(2))
+          
+          if !@reservation_history.save
+            flash.now[:danger] = "Could not save reservation history"
+          end
+
+          if !@customer.save
+            flash.now[:danger] = "Cound not update customer value"
+          end
         end
       end
 
@@ -42,6 +67,32 @@ class ReservationsController < ApplicationController
           Car.set_status(@reservation.car_id,"A")
           @car = Car.find(@reservation.car_id)
           @customer = Customer.find(@reservation.customer_id)
+          
+          current_time = ((DateTime.now).min).to_f / 60.0 + (DateTime.now).hour.to_f
+          from_time = ((DateTime.parse(params[:reservation][:from_time])).min).to_f / 60.0 + (DateTime.parse(params[:reservation][:from_time])).hour.to_f
+          total_time = current_time - from_time
+          charge_per_hour = (Car.find(params[:reservation][:car_id]).rate)
+          
+          @total_charge = total_time * charge_per_hour
+
+          # @customer = Customer.find(params[:reservation][:customer_id])
+
+          @customer.increment('rental_charge', @total_charge.round(2))
+          
+          @reservation_history = ReservationHistory.new(reservation_id: params[:reservation][:reservation_id],
+          customer_id: params[:reservation][:customer_id],
+          car_id: params[:reservation][:car_id],
+          from_time: params[:reservation][:from_time],
+          to_time: DateTime.now,
+          total_charges: @total_charge.round(2))
+          
+          if !@reservation_history.save
+            flash.now[:danger] = "Could not save reservation history"
+          end
+
+          if !@customer.save
+            flash.now[:danger] = "Cound not update customer value"
+          end
           UserMailer.notification_return(@customer, @car).deliver_now
           puts "A Set"
         end
@@ -72,8 +123,16 @@ class ReservationsController < ApplicationController
   end
 #checking out the car
   def checkout
-    Car.set_status(params[:car_id],"C")
-    redirect_to reservations_path(:res_for_customer => current_user)
+    current_time = ((DateTime.now).min).to_f / 60.0 + (DateTime.now).hour.to_f
+    from_time = ((DateTime.parse(params[:from_time])).min).to_f / 60.0 + (DateTime.parse(params[:from_time])).hour.to_f
+    total_time = current_time - from_time
+    puts total_time
+    if(total_time >= 0)
+      Car.set_status(params[:car_id],"C")
+      redirect_to reservations_path(:res_for_customer => current_user)
+    else
+      redirect_to root_path, :flash => {:danger => "Cannot checkout before reserved time. Please try again later."}
+    end 
   end
 #cancel the reservation
   def cancel
@@ -109,14 +168,31 @@ class ReservationsController < ApplicationController
   #create a reservation history after cancellation, deletion and completion
   def create_history(res_map)
     puts res_map
+    
+    current_time = ((DateTime.now).min).to_f / 60.0 + (DateTime.now).hour.to_f
+    from_time = ((DateTime.parse(res_map[:from_time])).min).to_f / 60.0 + (DateTime.parse(res_map[:from_time])).hour.to_f
+    total_time = current_time - from_time
+    charge_per_hour = (Car.find(res_map[:car_id]).rate)
+    
+    @total_charge = total_time * charge_per_hour
+
+    @customer = Customer.find(res_map[:customer_id])
+
+    @customer.increment('rental_charge', @total_charge.round(2))
+    
     @reservation_history = ReservationHistory.new(reservation_id: res_map[:reservation_id],
     customer_id: res_map[:customer_id],
     car_id: res_map[:car_id],
     from_time: res_map[:from_time],
-    to_time: res_map[:to_time],)
+    to_time: DateTime.now,
+    total_charges: @total_charge.round(2))
+    
     if !@reservation_history.save
       flash.now[:danger] = "Could not save reservation history"
+    end
 
+    if !@customer.save
+      flash.now[:danger] = "Cound not update customer value"
     end
   end
 

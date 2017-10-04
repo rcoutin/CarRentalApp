@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'reservations/checkout'
   get 'reservations/return'
   get 'car_approvals/approve'
+  get 'customers/pay'
 
   resources :customers
   resources :login, only: [:new, :create], as: :login

@@ -39,9 +39,19 @@
             :to_time =>reservation.to_time,
             :from_time =>reservation.from_time
              ), :class => "btn btn-danger" %></td>
-            <td><%= link_to 'Checkout', reservations_checkout_path(:car_id => reservation.car_id, :reservation_id => reservation.id ) , :class => "btn btn-success"%></td>
+            <td><%= link_to 'Checkout', reservations_checkout_path(
+            :reservation_id => reservation.id, 
+            :customer_id => reservation.customer_id,
+            :car_id=>  reservation.car.id,
+            :to_time =>reservation.to_time,
+            :from_time =>reservation.from_time) , :class => "btn btn-success"%></td>
       <% elsif reservation.car.status == "C"  %>
-            <td><%= link_to 'Return', reservations_return_path(:car_id => reservation.car_id, :reservation_id => reservation.id ) , :class => "btn btn-primary"%></td>
+            <td><%= link_to 'Return', reservations_return_path(
+            :reservation_id => reservation.id, 
+            :customer_id => reservation.customer_id,
+            :car_id=>  reservation.car.id,
+            :to_time =>reservation.to_time,
+            :from_time =>reservation.from_time) , :class => "btn btn-primary"%></td>
       <% end %>
 
     </tr>
