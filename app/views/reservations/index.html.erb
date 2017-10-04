@@ -26,9 +26,11 @@
       <td><%= reservation.to_time %></td>
       <td><%= reservation.car.rate %></td>
       <% if is_admin? %>
-      <td><%= reservation.car.status %></td>
+        <td><%= reservation.car.status %></td>
       <% end %>
-      <td><%= link_to 'Edit', [:edit, reservation] , :class => "btn btn-info"%></td>
+      <% if !is_customer? %>
+        <td><%= link_to 'Edit', [:edit, reservation] , :class => "btn btn-info"%></td>
+      <% end %>
       <% if reservation.car.status == "R" %>
             <td><%= link_to 'Cancel', reservations_cancel_path(:reservation_id => reservation.id, 
             :customer_id => reservation.customer_id,

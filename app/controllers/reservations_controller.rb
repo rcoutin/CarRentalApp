@@ -65,6 +65,9 @@ class ReservationsController < ApplicationController
   end
 
   def edit
+    if is_customer?
+      redirect_to reservations_path, :flash => { :danger => 'Cannot edit after reservation. Contact Administrator for support.'}
+    end
   end
 #checking out the car
   def checkout
