@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 20171004073653) do
     t.datetime "to_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "total_charges", precision: 2
+    t.decimal "total_charges", precision: 30, scale: 2
   end
 
   create_table "reservations", force: :cascade do |t|
@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 20171004073653) do
     t.datetime "to_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "total_charges", precision: 2
+    t.decimal "total_charges", precision: 30, scale: 2
     t.index ["car_id"], name: "index_reservations_on_car_id", unique: true
     t.index ["customer_id"], name: "index_reservations_on_customer_id", unique: true
   end
