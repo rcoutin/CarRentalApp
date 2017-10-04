@@ -101,7 +101,7 @@ class ReservationsController < ApplicationController
     else
       #redirect_to cars_path, :flash => { :danger => "Please enter correct values while reserving" }
       flash.now[:danger] = "Please enter correct values while reserving"
-      render action: "new"
+      redirect_to cars_path, :flash => { :danger => "Invalid parameters, please try again!" }
     end
     rescue ActiveRecord::RecordNotUnique => e
       redirect_to cars_path, :flash => { :danger => "Reservation already present" }
