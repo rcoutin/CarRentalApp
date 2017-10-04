@@ -20,4 +20,10 @@
 body{
 	font-family: "Open Sans";
 	font-weight: 100;
+	.navbar{
+		.navbar-header{
+			color: rgb(10, 10, 10);
+			font-size: 1.4em;
+		}
+	}
 }

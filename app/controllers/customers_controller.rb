@@ -18,7 +18,8 @@ class CustomersController < ApplicationController
     @customer = Customer.new(customer_params)
 
     if @customer.save
-      flash.now[:info] = "You have successfully signed up!"      
+      UserMailer.welcome_email(@customer).deliver_now
+      flash.now[:info] = "You have successfully signed up!"
       redirect_to new_login_path
     else
       render plain: params[:customer].inspect

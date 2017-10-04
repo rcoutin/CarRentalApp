@@ -20,7 +20,7 @@ class ReservationsController < ApplicationController
     # @reservation.from_time = Time.now.strftime("%FT%T")
     # @reservation.to_time = Time.now.strftime("%FT%T")
   end
-  
+
   def create
     @reservation = Reservation.new(reservation_params)
 
@@ -39,6 +39,9 @@ class ReservationsController < ApplicationController
         if(Car.find(params[:reservation][:car_id]).status == "C")
           Reservation.destroy(@reservation.id)
           Car.set_status(@reservation.car_id,"A")
+          @car = Car.find(@reservation.car_id)
+          @customer = Customer.find(@reservation.customer_id)
+          UserMailer.notification_return(@customer, @car).deliver_now
           puts "A Set"
         end
       end
@@ -62,6 +65,9 @@ class ReservationsController < ApplicationController
   end
 
   def edit
+    if is_customer?
+      redirect_to reservations_path, :flash => { :danger => 'Cannot edit after reservation. Contact Administrator for support.'}
+    end
   end
 #checking out the car
   def checkout

@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20171004073653) do
+=======
+ActiveRecord::Schema.define(version: 20171004072812) do
+>>>>>>> c865db7bc497fe5b9545a6ad32badbe103772671
 
   create_table "admins", force: :cascade do |t|
     t.string "first_name"
@@ -23,8 +27,18 @@ ActiveRecord::Schema.define(version: 20171004073653) do
     t.datetime "updated_at", null: false
   end
 
-# Could not dump table "b_admins" because of following StandardError
-#   Unknown type 'NUM' for column 'is_super_admin'
+  create_table "car_approvals", force: :cascade do |t|
+    t.string "manufacturer"
+    t.string "model"
+    t.string "license_number"
+    t.string "status"
+    t.decimal "rate"
+    t.string "style"
+    t.string "location"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "customer_id"
+  end
 
   create_table "cars", force: :cascade do |t|
     t.string "manufacturer"

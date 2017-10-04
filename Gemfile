@@ -63,7 +63,7 @@ gem 'bcrypt'
 #Bootstrap
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'autoprefixer-rails'
- 
+
 #Time validation
 gem 'jc-validates_timeliness', '~> 3.1.1'
 
@@ -72,3 +72,5 @@ gem 'jquery-rails'
 
 #Scheduler
 gem 'rufus-scheduler'
+
+gem 'figaro'

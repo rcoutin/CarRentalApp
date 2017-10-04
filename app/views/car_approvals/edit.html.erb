@@ -1,0 +1,38 @@
+<h1>Edit Car Approval</h1>
+<%= form_with scope: :car_approval, url: car_approval_path, method: :put, local: true do |form| %>
+    <p>
+      <%= form.label :manufacturer %><br>
+      <%= form.text_field :manufacturer, value: @car_approval.manufacturer %>
+    </p>
+
+    <p>
+      <%= form.label :model %><br>
+      <%= form.text_field :model, value: @car_approval.model %>
+    </p>
+    <p>
+      <%= form.label :license_number %><br>
+      <%= form.text_field :license_number, value: @car_approval.license_number %>
+    </p>
+
+    <p>
+      <%= form.label :style %><br>
+      <%= form.select :style, ["Sedan", "Coupe", "SUV"], selected: @car_approval.style %>
+    </p>
+    <p>
+      <%= form.label :status %><br>
+      <%= form.select :status, [["Available","A"], ["Reserved","R"], ["Checked-Out","C"]], selected: @car_approval.status %>
+    </p>
+
+    <p>
+      <%= form.label :location %><br>
+      <%= form.text_field :location, value: @car_approval.location %>
+    </p>
+
+    <p>
+      <%= form.label :rate %><br>
+      <%= form.text_field :rate, value: @car_approval.rate %>
+    </p>
+    <p>
+      <%= form.submit "Save edit" , :class => "btn btn-success" %>
+    </p>
+<% end %>

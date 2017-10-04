@@ -3,6 +3,7 @@
 <h1> Welcome, <%= @customer.first_name %>!</h1>
 <%= link_to 'Reserve a car', cars_path , :class => "btn btn-success"%>
 <%= link_to 'My Reservations', reservations_path(:res_for_customer => @customer.id) , :class => "btn btn-primary" %>
+<%= link_to 'Create car for approval', new_car_approval_path, :class => "btn btn-info" %>
 <% end %>
 
 <% if is_admin? %>

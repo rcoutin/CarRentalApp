@@ -6,6 +6,16 @@ class  ApplicationController < ActionController::Base
   @@disallowed_actions = ["index", "edit"]
   @@admin_roles = ["admin","super_admin"]
 
+  def get_user_name
+    if is_admin?
+      @user = Admin.find(current_user)
+    elsif is_customer?
+      @user = Customer.find(current_user)
+    end
+    @user.first_name + " " + @user.last_name
+  end
+  helper_method :get_user_name
+
   def current_user
     session[:current_user]
   end
@@ -38,6 +48,7 @@ class  ApplicationController < ActionController::Base
   def logged_in
   	current_user && current_user != -1
   end
+  helper_method :logged_in
 
   def check_unauthorized_access
    if !logged_in && !(@@allowed_controllers.include?(params[:controller]) && !@@disallowed_actions.include?(params[:action]))
@@ -60,4 +71,6 @@ class  ApplicationController < ActionController::Base
     @@admin_roles.include?(user_type)
   end
   helper_method :is_admin?
+
+
 end

@@ -1,0 +1,39 @@
+<h1>Approvals pending</h1>
+<table class="table table-striped" >
+  <tr>
+  	<th>Customer</th>
+    <th>Manufacturer</th>
+    <th>Model</th>
+    <th>Style</th>
+    <th>License Number</th>
+    <th>Location</th>
+    <th>Rate</th>
+    <th>Status</th>
+  </tr>
+
+  <% @car_approvals.each do |car| %>
+    <tr>
+    	<td><u><%= link_to car.customer_id, customer_path(:id => car.customer_id) %></u></td>
+      <td><%= car.manufacturer %></td>
+      <td><%= car.model%></td>
+      <td><%= car.style %></td>
+      <td><%= car.license_number %></td>
+      <td><%= car.location %></td>
+      <td><%= car.rate %></td>
+      <td><%= car.status %></td>
+      <td><%= link_to 'Edit entry', edit_car_approval_path(:id => car.id), :class => "btn btn-primary" %></td>
+      <td><%= link_to 'Approve', car_approvals_approve_path(
+      :id => car.id,
+      :customer_id => car.customer_id,
+      :car_manufacturer => car.manufacturer, 
+      :car_model => car.model,
+      :car_style => car.style,
+      :car_license_number => car.license_number,
+      :car_location => car.location,
+      :car_rate => car.rate,
+      :car_status => car.status
+      ), :class => "btn btn-success" %></td>
+      <td><%= link_to 'Disapprove', car_approval_path(:id => car.id, :customer_id => car.customer_id), method: :delete, :class => "btn btn-danger"%></td>
+    </tr>
+<% end %>
+</table>
