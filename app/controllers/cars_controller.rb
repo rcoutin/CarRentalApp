@@ -1,5 +1,4 @@
 class CarsController < ApplicationController
-
   def index
     if is_admin?
       @cars =  Car.all
@@ -8,11 +7,12 @@ class CarsController < ApplicationController
     end
     @cars = @cars.search(params[:search])
   end
-
   def show
     @car = Car.find(params[:id])
+    if is_admin?
+    @reservation_hist = ReservationHistory.where(:car_id => params[:id])
+    end
   end
-
   def destroy
     Car.destroy(params[:id])
     flash.now[:danger] = "Car has been deleted"

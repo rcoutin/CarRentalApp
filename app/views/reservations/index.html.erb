@@ -1,4 +1,5 @@
 <h1>Reservations</h1>
+  <td><%= link_to 'History', reservation_history_index_path(:current_user_from_page =>current_user),:class => "btn btn-success"%></td>
 
 <table class="table table-striped">
   <tr>
@@ -13,6 +14,7 @@
     <th>Status</th>
     <% end %>
   </tr>
+  
 
   <% @reservations.each do |reservation| %>
     <tr>
@@ -28,7 +30,12 @@
       <% end %>
       <td><%= link_to 'Edit', [:edit, reservation] , :class => "btn btn-info"%></td>
       <% if reservation.car.status == "R" %>
-            <td><%= link_to 'Cancel', reservations_cancel_path(:car_id => reservation.car_id, :reservation_id => reservation.id ), :class => "btn btn-danger" %></td>
+            <td><%= link_to 'Cancel', reservations_cancel_path(:reservation_id => reservation.id, 
+            :customer_id => reservation.customer_id,
+            :car_id=>  reservation.car.id,
+            :to_time =>reservation.to_time,
+            :from_time =>reservation.from_time
+             ), :class => "btn btn-danger" %></td>
             <td><%= link_to 'Checkout', reservations_checkout_path(:car_id => reservation.car_id, :reservation_id => reservation.id ) , :class => "btn btn-success"%></td>
       <% elsif reservation.car.status == "C"  %>
             <td><%= link_to 'Return', reservations_return_path(:car_id => reservation.car_id, :reservation_id => reservation.id ) , :class => "btn btn-primary"%></td>
