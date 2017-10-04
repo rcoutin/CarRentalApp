@@ -73,24 +73,27 @@ class ReservationsController < ApplicationController
 #checking out the car
   def checkout
     Car.set_status(params[:car_id],"C")
-    redirect_to reservations_path
+    redirect_to reservations_path(:res_for_customer => current_user)
   end
 #cancel the reservation
   def cancel
     Reservation.destroy(params[:reservation_id])
     Car.find(params[:car_id]).update(:status => "A")
     create_history(params)
-    redirect_to reservations_path
+    redirect_to reservations_path(:res_for_customer => current_user)
   end
 
   def return
     Reservation.destroy(params[:reservation_id])
     car = Car.find(params[:car_id])
     car.update(:status => "A")
-    customers = Customer.find(Notification.where(:car_id => params[:car_id]).customer_id)
-    customers.each{|customer| UserMailer.notification_available(customer, car).deliver_now}
+    @notifications = Notification.where(:car_id => params[:car_id])
+    @notifications.each do |notification|
+      customer = Customer.find(notification.customer_id)
+      UserMailer.notification_available(customer, car).deliver_now
+    end
     create_history(params)
-    redirect_to reservations_path
+    redirect_to reservations_path(:res_for_customer => current_user)
   end
 
   private
@@ -113,7 +116,7 @@ class ReservationsController < ApplicationController
     to_time: res_map[:to_time],)
     if !@reservation_history.save
       flash.now[:danger] = "Could not save reservation history"
-  
+
     end
   end
 
