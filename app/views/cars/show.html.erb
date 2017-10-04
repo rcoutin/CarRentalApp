@@ -31,6 +31,18 @@
     <%= form.label :rate %>:
     <%= @car.rate %>
   </p>
+
+  <p>
+    <% if @car.status == "R" || @car.status == "C" %>
+      <%= form.label :customer %>
+      <%= @customer.first_name %>&nbsp;<%= @customer.last_name %><br><br>
+      <% if @car.status == "R" %>
+        Car is reserved.
+      <% end %>
+      <% if @car.status == "C" %>
+        Car is checked out.
+      <% end %>
+    <% end %>
 <% end %>
 
 <% if is_admin? %>

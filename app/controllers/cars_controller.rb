@@ -5,8 +5,11 @@ class CarsController < ApplicationController
   end
   def show
     @car = Car.find(params[:id])
+    @reservation = Reservation.where(:car_id => params[:id])
+    @reservation.each{ |r| @customer = Customer.find(r.customer_id) }
+    
     if is_admin?
-    @reservation_hist = ReservationHistory.where(:car_id => params[:id])
+      @reservation_hist = ReservationHistory.where(:car_id => params[:id])
     end
   end
   def destroy
