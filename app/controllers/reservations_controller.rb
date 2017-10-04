@@ -4,11 +4,12 @@ class ReservationsController < ApplicationController
   before_action :set_reservation, only: [:show, :edit, :update, :destroy]
   #after_action :create_history
 
+
   def index
     if is_customer?
     @reservations = Reservation.where(:customer_id => params[:res_for_customer])
     elsif is_admin?
-      @reservations = Reservation.all
+    @reservations = Reservation.all
     end
   end
   def show
@@ -83,7 +84,13 @@ class ReservationsController < ApplicationController
   end
 
   def return
-     cancel
+    Reservation.destroy(params[:reservation_id])
+    car = Car.find(params[:car_id])
+    car.update(:status => "A")
+    customers = Customer.find(Notification.where(:car_id => params[:car_id]).customer_id)
+    customers.each{|customer| UserMailer.notification_available(customer, car).deliver_now}
+    create_history(params)
+    redirect_to reservations_path
   end
 
   private
