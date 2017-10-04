@@ -1,10 +1,6 @@
 class CarsController < ApplicationController
   def index
-    if is_admin?
-      @cars =  Car.all
-    else
-       @cars = Car.where(:status => "A")
-    end
+    @cars =  Car.all
     @cars = @cars.search(params[:search])
   end
   def show
@@ -16,7 +12,7 @@ class CarsController < ApplicationController
   def destroy
     Car.destroy(params[:id])
     flash.now[:danger] = "Car has been deleted"
-  
+
     redirect_to cars_path
 
 end

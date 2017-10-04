@@ -69,3 +69,6 @@ gem 'jc-validates_timeliness', '~> 3.1.1'
 
 #jQuery
 gem 'jquery-rails'
+
+#Scheduler
+gem 'rufus-scheduler'

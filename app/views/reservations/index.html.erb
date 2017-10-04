@@ -4,7 +4,7 @@
 <table class="table table-striped">
   <tr>
     <% if is_admin? %>
-    <th>User ID</th>
+    <th>Customer ID</th>
     <% end %>
     <th>Car Name</th>
     <th>Reserved From</th>
@@ -19,7 +19,7 @@
   <% @reservations.each do |reservation| %>
     <tr>
       <% if is_admin? %>
-      <td><%= reservation.customer_id %></td>
+      <td><u><%= link_to reservation.customer_id, customer_path(:id => reservation.customer_id) %></u></td>
       <% end %>
       <td><%= reservation.car.manufacturer %> <%= reservation.car.model %></td>
       <td><%= reservation.from_time  %></td>
