@@ -140,7 +140,6 @@ class ReservationsController < ApplicationController
   def cancel
     Reservation.destroy(params[:reservation_id])
     Car.find(params[:car_id]).update(:status => "A")
-    create_history(params)
     redirect_to reservations_path(:res_for_customer => current_user)
   end
 
