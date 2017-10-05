@@ -1,11 +1,24 @@
 class CarsController < ApplicationController
   def index
-    @cars =  Car.all
-    @cars = @cars.search(params[:search])
+
+    if is_admin?
+      @cars =  Car.all
+    elsif is_customer?
+    res= Reservation.where(:customer_id => current_user)
+    car = []
+    res.each{|r| car << r.car_id}
+    @cars = Car.where.not(:id => car)
+
+     # @cars = Reservation.joins("RIGHT JOIN 'cars' ON cars.id = reservations.car_id").where.not(:customer_id => current_user).select("cars.*")      
+    end
+    #@cars = @cars.search(params[:search])
+    
   end
   def show
     @car = Car.find(params[:id])
     @reservation = Reservation.where(:car_id => params[:id])
+
+    @customer=Customer.new
     @reservation.each{ |r| @customer = Customer.find(r.customer_id) }
     
     if is_admin?

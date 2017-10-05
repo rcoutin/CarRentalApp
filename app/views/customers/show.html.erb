@@ -26,6 +26,7 @@
         <%= @customer.license_number %>
       </p>
     </h6>
+     <h3>Reservations</h3>
     <table class="table table-striped">
       <tr>
         <th>Car Name</th>
@@ -50,18 +51,26 @@
     <% end %>
   </tr>
   <% end %>
+</table>
 
+ <h3>Past Reservations</h3>
+  <table class="table table-striped">
+      <tr>
+        <th>Car Name</th>
+        <th>Reserved From</th>
+        <th>Reserved Till</th>
+        <th>Total Charges</th>
+      </tr>
   <% @reservation_hist.each do |hist| %>
   <tr>
-    <td><%= hist.manufacturer %> <%= @customer.model %></td>
+    <td><%= hist.manufacturer %> <%= hist.model %></td>
     <td><%= hist.from_time  %></td>
     <td><%= hist.to_time %></td>
-    <td><%= hist.rate %></td>
-    <td><%= hist.status %></td>
+    <td><%= hist.total_charges %></td>
   </tr>
   <% end %>
-
+</table>
 
 
 <% end %>
-<%end %>
+<% end %>
