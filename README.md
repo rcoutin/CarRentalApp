@@ -5,7 +5,9 @@ The application requires you to make use of legitimate e-mails IDs (and not fake
 
 ### Link: https://one-plus-car-rental.herokuapp.com/
 
-Note: Clicking on OnePlus Car Rentals (top left) at any point of time will take you back to the homepage.
+Note: Clicking on OnePlus Car Rentals (top left) at any point of time will take you back to the homepage.\
+
+All extra credit requirements have been implemented.
 ## Credentials
 
 ##### SuperAdmins
@@ -74,13 +76,13 @@ The full problem statement can be found [here](http://www.csc2.ncsu.edu/faculty/
 	* A car cannot be deleted if it is a part of an ongoing reservation
 
 * _Search Cars_
-	* Customers can search cars based on Model Name/ Manufacturer/ Location/ Status/ Style in one search box
+	* Customers can search cars based on Model Name/ Manufacturer/ Location/ Style in one search box
 
 * _Notifications are sent when_
 	* 	User Signs up successfully
-	* 	A car suggestion by a user is approved
-	* 	A car suggestion by a user is rejected
-	* 	A car which the customer has subscribed to becomes available
+	* 	**A car suggestion by a user is approved**
+	* 	**A car suggestion by a user is rejected**
+	* 	**A car which the customer has subscribed to becomes available**
 	* 	A car is automatically returned when reservation time runs out
 
 ## Routes
