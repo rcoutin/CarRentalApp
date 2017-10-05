@@ -35,7 +35,7 @@ class CustomersController < ApplicationController
   
   def destroy
     @reservation = Reservation.where(:customer_id => params[:id])
-    if !@reservation
+    if @reservation.length == 0
       Customer.destroy(params[:id])
       flash.now[:danger] = "The Customer has been deleted"
       redirect_to customers_path
