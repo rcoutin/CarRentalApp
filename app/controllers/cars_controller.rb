@@ -26,11 +26,14 @@ class CarsController < ApplicationController
     end
   end
   def destroy
-    Car.destroy(params[:id])
-    flash.now[:danger] = "Car has been deleted"
-
-    redirect_to cars_path
-
+    @reservation = Reservation.where(:car_id => params[:id])
+    if !@reservation
+      Car.destroy(params[:id])
+      flash.now[:danger] = "Car has been deleted"
+      redirect_to cars_path
+    else
+      redirect_to cars_path, :flash => {:danger => "Car cannot be deleted as it has a reservation."}
+    end
 end
   def create
     @car = Car.new(car_params)

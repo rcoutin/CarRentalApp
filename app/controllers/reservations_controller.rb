@@ -9,7 +9,7 @@ class ReservationsController < ApplicationController
     if is_customer?
     @reservations = Reservation.where(:customer_id => params[:res_for_customer])
 
-    
+
     elsif is_admin?
     @reservations = Reservation.all
     end
@@ -26,8 +26,8 @@ class ReservationsController < ApplicationController
 
   def create
     @reservation = Reservation.new(reservation_params)
-   
-    
+
+
     begin
     time_val = validate_time(@reservation.from_time, @reservation.to_time);
     if time_val.empty? && @reservation.save
@@ -39,7 +39,7 @@ class ReservationsController < ApplicationController
         if(Car.find(params[:reservation][:car_id]).status == "R")
           Reservation.destroy(@reservation.id)
           Car.set_status(@reservation.car_id,"A")
-         
+
           create_history(params[:reservation])
         end
       end
@@ -50,12 +50,12 @@ class ReservationsController < ApplicationController
         if(Car.find(params[:reservation][:car_id]).status == "C")
           Reservation.destroy(@reservation.id)
           Car.set_status(@reservation.car_id,"A")
-         
+
           @car = Car.find(@reservation.car_id)
           @customer = Customer.find(@reservation.customer_id)
-         
+
           create_history(params[:reservation])
-         
+
           UserMailer.notification_return(@customer, @car).deliver_now
          
         end
@@ -93,7 +93,7 @@ class ReservationsController < ApplicationController
       redirect_to reservations_path(:res_for_customer => current_user)
     else
       redirect_to root_path, :flash => {:danger => "Cannot checkout before reserved time. Please try again later."}
-    end 
+    end
   end
 #cancel the reservation
   def cancel
@@ -109,7 +109,7 @@ class ReservationsController < ApplicationController
     customer_ids =[]
     notifications.each {|n| customer_ids << n.customer_id}
     customers = Customer.where(:id => customer_ids)
-    customers.each{|customer_obj| UserMailer.notification_available(customer_obj, car).deliver_now}
+    customers.each{|customer_obj| UserMailer.notification_available(customer_obj, car).deliver_later}
     notifications.delete_all
     create_history(params)
     Reservation.destroy(params[:reservation_id])
@@ -128,9 +128,14 @@ class ReservationsController < ApplicationController
 
   #create a reservation history after cancellation, deletion and completion
   def create_history(res_map)
+<<<<<<< HEAD
     
+=======
+    puts res_map
+
+>>>>>>> bdd5dc8cb510ff96823dae6fcb20cc5926cc79a1
     charge_per_hour = (Car.find(res_map[:car_id]).rate)
-    
+
     total_time = calculate_time_difference(res_map)
 
     @total_charge = total_time * charge_per_hour
@@ -145,7 +150,7 @@ class ReservationsController < ApplicationController
     from_time: res_map[:from_time],
     to_time: DateTime.now,
     total_charges: @total_charge.round(2))
-    
+
     if !@reservation_history.save
       flash.now[:danger] = "Could not save reservation history"
     end
@@ -178,16 +183,16 @@ class ReservationsController < ApplicationController
   def calculate_time_difference(map)
     current_time = (DateTime.now).hour.to_f + ((DateTime.now).min.to_f / 60) - 4
     from_time = (DateTime.parse(map[:from_time])).hour.to_f + (DateTime.parse(map[:from_time])).min.to_f / 60
-    
+
     if current_time < 12 && from_time >= 12
       current_time += 24
     end
-    
+
     total_time = (current_time - from_time).to_f
    
     return total_time
   end
-    
-    
+
+
 
 end

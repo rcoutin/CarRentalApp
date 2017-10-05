@@ -28,7 +28,7 @@ class CarApprovalsController < ApplicationController
   def destroy
     @car_approval = CarApproval.find(params[:id])
     @customer = Customer.find(params[:customer_id])
-		UserMailer.notification_disapproved(@customer, @car_approval).deliver_now
+		UserMailer.notification_disapproved(@customer, @car_approval).deliver_later
     CarApproval.destroy(params[:id])
     redirect_to car_approvals_path
 	end
@@ -59,7 +59,7 @@ class CarApprovalsController < ApplicationController
       status: params[:car_status]
     )
     @customer = Customer.find(params[:customer_id])
-		UserMailer.notification_approved(@customer, @car).deliver_now
+		UserMailer.notification_approved(@customer, @car).deliver_later
     if @car.save
       CarApproval.destroy(params[:id])
       redirect_to cars_path

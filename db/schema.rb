@@ -23,9 +23,6 @@ ActiveRecord::Schema.define(version: 20171004073653) do
     t.datetime "updated_at", null: false
   end
 
-# Could not dump table "b_admins" because of following StandardError
-#   Unknown type 'NUM' for column 'is_super_admin'
-
   create_table "car_approvals", force: :cascade do |t|
     t.string "manufacturer"
     t.string "model"
@@ -62,21 +59,6 @@ ActiveRecord::Schema.define(version: 20171004073653) do
     t.datetime "updated_at", null: false
     t.string "password_digest"
     t.float "rental_charge", default: 0.0
-  end
-
-  create_table "delayed_jobs", force: :cascade do |t|
-    t.integer "priority", default: 0, null: false
-    t.integer "attempts", default: 0, null: false
-    t.text "handler", null: false
-    t.text "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string "locked_by"
-    t.string "queue"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
   create_table "notifications", force: :cascade do |t|

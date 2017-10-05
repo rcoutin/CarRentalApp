@@ -10,7 +10,7 @@ class CustomersController < ApplicationController
   def show
     @customer = Customer.find(params[:id])
     if is_admin?
-   @reservation_hist = ReservationHistory.joins("JOIN cars ON cars.id = reservation_histories.car_id").where(:customer_id => params[:id]).select("cars.*, reservation_histories.*")#.order('created_at DESC')
+   @reservation_hist = ReservationHistory.joins("JOIN cars ON cars.id = reservation_histories.car_id").where(:customer_id => params[:id]).select("cars.*, reservation_histories.*")
   end
   end
 
@@ -21,7 +21,7 @@ class CustomersController < ApplicationController
     @customer = Customer.new(customer_params)
 
     if @customer.save
-      UserMailer.welcome_email(@customer).deliver_now
+      UserMailer.welcome_email(@customer).deliver_later
       flash.now[:info] = "You have successfully signed up!"
       redirect_to new_login_path
     else
@@ -34,10 +34,14 @@ class CustomersController < ApplicationController
   end
   
   def destroy
-    Customer.destroy(params[:id])
-    flash.now[:danger] = "The Customer has been deleted"
-    redirect_to customers_path
-
+    @reservation = Reservation.where(:customer_id => params[:id])
+    if !@reservation
+      Customer.destroy(params[:id])
+      flash.now[:danger] = "The Customer has been deleted"
+      redirect_to customers_path
+    else
+      redirect_to customers_path, :flash => {:danger => "Customer cannot be deleted as they have a standing reservation."}
+    end
   end
   def update
     @customer = Customer.find(params[:id])
