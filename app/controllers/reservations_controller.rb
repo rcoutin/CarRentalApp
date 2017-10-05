@@ -24,9 +24,11 @@ class ReservationsController < ApplicationController
 
   def create
     @reservation = Reservation.new(reservation_params)
-
+   
+    
     begin
-    if @reservation.save
+    
+    if validate_time(@reservation.from_time, @reservation.to_time) && @reservation.save
       Car.set_status(params[:reservation][:car_id],"R")
       Rufus::Scheduler.singleton.at @reservation.from_time + (4 * 60 * 60).seconds + 30.minutes do
         if(Car.find(params[:reservation][:car_id]).status == "R")
@@ -143,15 +145,16 @@ class ReservationsController < ApplicationController
   end
 
   def return
-    Reservation.destroy(params[:reservation_id])
     car = Car.find(params[:car_id])
     car.update(:status => "A")
-    @notifications = Notification.where(:car_id => params[:car_id])
-    @notifications.each do |notification|
-      customer = Customer.find(notification.customer_id)
-      UserMailer.notification_available(customer, car).deliver_now
-    end
+    notifications = Notification.where(:car_id => params[:car_id]).select(:customer_id)
+    customer_ids =[]
+    notifications.each {|n| customer_ids << n.customer_id}
+    customers = Customer.where(:id => customer_ids)
+    customers.each{|customer_obj| UserMailer.notification_available(customer_obj, car).deliver_now}
+    notifications.delete_all
     create_history(params)
+    Reservation.destroy(params[:reservation_id])
     redirect_to reservations_path(:res_for_customer => current_user)
   end
 
@@ -161,7 +164,7 @@ class ReservationsController < ApplicationController
   end
 
   def reservation_params
-    params.require(:reservation).permit(:customer_id, :car_id, :from_time, :to_time)
+    params.require(:reservation).permit(:customer_id, :car_id, :from_time, :to_time, :car_id, :car_model, :car_manufacturer)
   end
 
 
@@ -196,7 +199,39 @@ class ReservationsController < ApplicationController
     end
   end
 
-
-
+  def validate_time(from_time,to_time)
+    status = true;
+    if from_time == nil
+      #errors.add(:from_time, 'Invalid time entry.')
+      puts "1"
+      return false
+    elsif to_time == nil
+     # errors.add(:to_time, 'Invalid time entry.')
+      puts "2"
+      return false
+ 		elsif ((from_time - DateTime.now) + ( 4 * 60 * 60 )) < 0
+ 		#	errors.add(:from_time, 'Time cannot be in the past.')
+      puts "3"
+      return false
+ 		elsif (from_time - DateTime.now) / 24 / 60 / 60 > 7
+ 			#errors.add(:from_time, 'The reservation time has to be in the next one week.')
+      puts "4"
+      return false
+  	elsif to_time < from_time
+  	#	errors.add(:to_time, 'The time cannot be before the initial reservation time.')
+      puts "5"
+      return false
+  	elsif to_time - from_time < 3600
+  		#errors.add(:to_time, 'The minimum reservation time is 1 hour.')
+      puts "6"
+      return false
+      puts to_time - from_time
+  	elsif to_time - from_time > 36000
+      #errors.add(:to_time, 'The maximum reservation time is 10 hours.')
+      return false
+      puts "7"
+    end
+    return status
+  end
 
 end
