@@ -16,7 +16,6 @@
       <%= @customer.first_name %>
       <%= @customer.last_name %>
     </h2>
-
     <h6>
       <p>
         <%= form.label :email %>:
@@ -51,5 +50,18 @@
     <% end %>
   </tr>
   <% end %>
+
+  <% @reservation_hist.each do |hist| %>
+  <tr>
+    <td><%= hist.manufacturer %> <%= @customer.model %></td>
+    <td><%= hist.from_time  %></td>
+    <td><%= hist.to_time %></td>
+    <td><%= hist.rate %></td>
+    <td><%= hist.status %></td>
+  </tr>
   <% end %>
+
+
+
 <% end %>
+<%end %>
