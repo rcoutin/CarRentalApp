@@ -10,7 +10,7 @@ class CustomersController < ApplicationController
   def show
     @customer = Customer.find(params[:id])
     if is_admin?
-   @reservation_hist = ReservationHistory.joins("INNER JOIN 'cars' ON cars.id = reservation_histories.car_id").where(:customer_id => params[:id]).select("cars.*, reservation_histories.*")
+   @reservation_hist = ReservationHistory.joins("JOIN cars ON cars.id = reservation_histories.car_id").where(:customer_id => params[:id]).select("cars.*, reservation_histories.*")
   end
   end
 
