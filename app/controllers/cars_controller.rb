@@ -5,8 +5,11 @@ class CarsController < ApplicationController
   end
   def show
     @car = Car.find(params[:id])
+    @reservation = Reservation.where(:car_id => params[:id])
+    @reservation.each{ |r| @customer = Customer.find(r.customer_id) }
+    
     if is_admin?
-    @reservation_hist = ReservationHistory.where(:car_id => params[:id])
+      @reservation_hist = ReservationHistory.where(:car_id => params[:id])
     end
   end
   def destroy
@@ -43,6 +46,9 @@ end
 
   def edit
     @car = Car.find(params[:id])
+    if @car.status == "R" || @car.status == "C"
+      redirect_to cars_path, :flash => {:danger => "Cannot edit a car while it is reserved or checked out"}
+    end
   end
 
   private

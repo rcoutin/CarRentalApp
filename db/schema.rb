@@ -61,21 +61,6 @@ ActiveRecord::Schema.define(version: 20171004073653) do
     t.float "rental_charge", default: 0.0
   end
 
-  create_table "delayed_jobs", force: :cascade do |t|
-    t.integer "priority", default: 0, null: false
-    t.integer "attempts", default: 0, null: false
-    t.text "handler", null: false
-    t.text "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string "locked_by"
-    t.string "queue"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
-  end
-
   create_table "notifications", force: :cascade do |t|
     t.integer "customer_id"
     t.integer "car_id"
@@ -91,7 +76,7 @@ ActiveRecord::Schema.define(version: 20171004073653) do
     t.datetime "to_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "total_charges", precision: 2
+    t.decimal "total_charges", precision: 30, scale: 2
   end
 
   create_table "reservations", force: :cascade do |t|
@@ -101,7 +86,7 @@ ActiveRecord::Schema.define(version: 20171004073653) do
     t.datetime "to_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "total_charges", precision: 2
+    t.decimal "total_charges", precision: 30, scale: 2
     t.index ["car_id"], name: "index_reservations_on_car_id", unique: true
     t.index ["customer_id"], name: "index_reservations_on_customer_id", unique: true
   end

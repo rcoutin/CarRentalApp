@@ -33,12 +33,12 @@ class CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
   end
   
-def destroy
-  Customer.destroy(params[:id])
-  flash.now[:danger] = "The Customer has been deleted"
-  redirect_to customers_path
+  def destroy
+    Customer.destroy(params[:id])
+    flash.now[:danger] = "The Customer has been deleted"
+    redirect_to customers_path
 
-end
+  end
   def update
     @customer = Customer.find(params[:id])
 
@@ -49,6 +49,16 @@ end
     end
   end
 
+  def pay
+    print params
+    @customer = Customer.find(params[:id])
+    @customer.rental_charge = 0.0
+    if @customer.save
+      redirect_to root_path
+    else
+      redirect_to root_path, :flash => {:danger => "Paying failed. Try again."}
+    end
+  end
   private
   def customer_params
     params.require(:customer).permit(:first_name, :last_name, :email, :password, :date_of_birth, :license_number)
