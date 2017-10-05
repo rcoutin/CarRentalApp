@@ -27,7 +27,7 @@ class CarsController < ApplicationController
   end
   def destroy
     @reservation = Reservation.where(:car_id => params[:id])
-    if !@reservation
+    if @reservation.length == 0
       Car.destroy(params[:id])
       flash.now[:danger] = "Car has been deleted"
       redirect_to cars_path
