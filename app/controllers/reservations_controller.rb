@@ -128,6 +128,8 @@ class ReservationsController < ApplicationController
     current_time = ((DateTime.now).min).to_f / 60.0 + (DateTime.now).hour.to_f
     from_time = ((DateTime.parse(params[:from_time])).min).to_f / 60.0 + (DateTime.parse(params[:from_time])).hour.to_f - 4
     total_time = current_time - from_time
+    puts current_time
+    puts from_time
     puts total_time
     if(total_time >= 0)
       Car.set_status(params[:car_id],"C")
@@ -172,7 +174,7 @@ class ReservationsController < ApplicationController
     puts res_map
     
     current_time = ((DateTime.now).min).to_f / 60.0 + (DateTime.now).hour.to_f
-    from_time = ((DateTime.parse(res_map[:from_time])).min).to_f / 60.0 + (DateTime.parse(res_map[:from_time])).hour.to_f
+    from_time = ((DateTime.parse(res_map[:from_time])).min).to_f / 60.0 + (DateTime.parse(res_map[:from_time])).hour.to_f - 4
     total_time = current_time - from_time - 4.0
     charge_per_hour = (Car.find(res_map[:car_id]).rate)
     
