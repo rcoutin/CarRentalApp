@@ -128,12 +128,7 @@ class ReservationsController < ApplicationController
 
   #create a reservation history after cancellation, deletion and completion
   def create_history(res_map)
-<<<<<<< HEAD
     
-=======
-    puts res_map
-
->>>>>>> bdd5dc8cb510ff96823dae6fcb20cc5926cc79a1
     charge_per_hour = (Car.find(res_map[:car_id]).rate)
 
     total_time = calculate_time_difference(res_map)
