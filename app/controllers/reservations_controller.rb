@@ -57,7 +57,7 @@ class ReservationsController < ApplicationController
           create_history(params[:reservation])
          
           UserMailer.notification_return(@customer, @car).deliver_now
-          puts "A Set"
+         
         end
       end
       redirect_to @reservation, :flash => { :success => 'Reserved' }
@@ -128,7 +128,6 @@ class ReservationsController < ApplicationController
 
   #create a reservation history after cancellation, deletion and completion
   def create_history(res_map)
-    puts res_map
     
     charge_per_hour = (Car.find(res_map[:car_id]).rate)
     
@@ -160,26 +159,18 @@ class ReservationsController < ApplicationController
     msg = ''
     if from_time == nil
       msg =  'Invalid time entry.'
-      puts "1"
     elsif to_time == nil
       msg =  'Invalid time entry.'
-      puts "2"
  		elsif ((from_time - DateTime.now) + ( 4 * 60 * 60 )) < 0
  		 msg =  'Time cannot be in the past.'
-      puts "3"
  		elsif (from_time - DateTime.now) / 24 / 60 / 60 > 7
       msg =  'The reservation time has to be in the next one week.'
-      puts "4"
   	elsif to_time < from_time
       msg =  'The time cannot be before the initial reservation time.'
-      puts "5"
   	elsif to_time - from_time < 3600
       msg =  'The minimum reservation time is 1 hour.'
-      puts "6"
-      puts to_time - from_time
   	elsif to_time - from_time > 36000
       msg =  'The maximum reservation time is 10 hours.'
-      puts "7"
     end
     return msg
   end
@@ -193,13 +184,7 @@ class ReservationsController < ApplicationController
     end
     
     total_time = (current_time - from_time).to_f
-    puts "CURRENT TIME"
-    puts current_time
-    puts "FROM TIME"
-    puts from_time
-    puts "TOTAL TIME"
-    puts "__________"
-    puts total_time
+   
     return total_time
   end
     
