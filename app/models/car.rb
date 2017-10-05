@@ -13,8 +13,9 @@ class Car < ApplicationRecord
   has_one :reservation
 
   def self.search(term)
+    term=term.downcase
     if term
-      where('model LIKE ? OR manufacturer LIKE ? OR style LIKE ? OR status LIKE ? OR location LIKE ?', "%#{term}%", "%#{term}%", "%#{term}%", "%#{term}%", "%#{term}%")
+      where('lower(model) LIKE ? OR lower(manufacturer) LIKE ? OR lower(style) LIKE ? OR lower(status) LIKE ? OR lower(location) LIKE ?', "%#{term}%", "%#{term}%", "%#{term}%", "%#{term}%", "%#{term}%")
     else
       all
     end
