@@ -35,8 +35,8 @@ class ReservationsController < ApplicationController
           Reservation.destroy(@reservation.id)
           Car.set_status(@reservation.car_id,"A")
 
-          current_time = ((DateTime.now).min).to_f / 60.0 + (DateTime.now).hour.to_f
-          from_time = ((DateTime.parse(params[:reservation][:from_time])).min).to_f / 60.0 + (DateTime.parse(params[:reservation][:from_time])).hour.to_f - 4
+          current_time = ((DateTime.now).min).to_f / 60.0 + (DateTime.now).hour.to_f - 4
+          from_time = ((DateTime.parse(params[:reservation][:from_time])).min).to_f / 60.0 + (DateTime.parse(params[:reservation][:from_time])).hour.to_f
           total_time = current_time - from_time
           charge_per_hour = (Car.find(params[:reservation][:car_id]).rate)
           
@@ -70,8 +70,8 @@ class ReservationsController < ApplicationController
           @car = Car.find(@reservation.car_id)
           @customer = Customer.find(@reservation.customer_id)
           
-          current_time = ((DateTime.now).min).to_f / 60.0 + (DateTime.now).hour.to_f
-          from_time = ((DateTime.parse(params[:reservation][:from_time])).min).to_f / 60.0 + (DateTime.parse(params[:reservation][:from_time])).hour.to_f - 4
+          current_time = ((DateTime.now).min).to_f / 60.0 + (DateTime.now).hour.to_f - 4
+          from_time = ((DateTime.parse(params[:reservation][:from_time])).min).to_f / 60.0 + (DateTime.parse(params[:reservation][:from_time])).hour.to_f
           total_time = current_time - from_time
           charge_per_hour = (Car.find(params[:reservation][:car_id]).rate)
           
@@ -125,8 +125,8 @@ class ReservationsController < ApplicationController
   end
 #checking out the car
   def checkout
-    current_time = ((DateTime.now).min).to_f / 60.0 + (DateTime.now).hour.to_f
-    from_time = ((DateTime.parse(params[:from_time])).min).to_f / 60.0 + (DateTime.parse(params[:from_time])).hour.to_f - 4
+    current_time = ((DateTime.now).min).to_f / 60.0 + (DateTime.now).hour.to_f - 4
+    from_time = ((DateTime.parse(params[:from_time])).min).to_f / 60.0 + (DateTime.parse(params[:from_time])).hour.to_f
     total_time = current_time - from_time
     puts current_time
     puts from_time
@@ -173,8 +173,8 @@ class ReservationsController < ApplicationController
   def create_history(res_map)
     puts res_map
     
-    current_time = ((DateTime.now).min).to_f / 60.0 + (DateTime.now).hour.to_f
-    from_time = ((DateTime.parse(res_map[:from_time])).min).to_f / 60.0 + (DateTime.parse(res_map[:from_time])).hour.to_f - 4
+    current_time = ((DateTime.now).min).to_f / 60.0 + (DateTime.now).hour.to_f - 4
+    from_time = ((DateTime.parse(res_map[:from_time])).min).to_f / 60.0 + (DateTime.parse(res_map[:from_time])).hour.to_f
     total_time = current_time - from_time - 4.0
     charge_per_hour = (Car.find(res_map[:car_id]).rate)
     
