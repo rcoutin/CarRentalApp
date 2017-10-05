@@ -192,10 +192,12 @@ class ReservationsController < ApplicationController
   def calculate_time_difference(map)
     current_time = (DateTime.now).hour.to_f + ((DateTime.now).min.to_f / 60) - 4
     from_time = (DateTime.parse(map[:from_time])).hour.to_f + (DateTime.parse(map[:from_time])).min.to_f / 60
-    total_time = (current_time - from_time).to_f
+    
     if current_time < 12 && from_time >= 12
       current_time += 24
     end
+    
+    total_time = (current_time - from_time).to_f
     puts "CURRENT TIME"
     puts current_time
     puts "FROM TIME"
