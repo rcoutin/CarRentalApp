@@ -34,7 +34,7 @@ class ReservationsController < ApplicationController
           Car.set_status(@reservation.car_id,"A")
 
           current_time = ((DateTime.now).min).to_f / 60.0 + (DateTime.now).hour.to_f
-          from_time = ((DateTime.parse(params[:reservation][:from_time])).min).to_f / 60.0 + (DateTime.parse(params[:reservation][:from_time])).hour.to_f
+          from_time = ((DateTime.parse(params[:reservation][:from_time])).min).to_f / 60.0 + (DateTime.parse(params[:reservation][:from_time])).hour.to_f - 4.to_f
           total_time = current_time - from_time
           charge_per_hour = (Car.find(params[:reservation][:car_id]).rate)
           
@@ -110,7 +110,7 @@ class ReservationsController < ApplicationController
 
   def update
       if @reservation.update(reservation_params)
-        redirect_to @reservation, :flash => { :success => 'Reservation successfulyl updated' }
+        redirect_to @reservation, :flash => { :success => 'Reservation successfully updated' }
       else
         redirect_to @reservation, :flash => { :danger => 'Problem in updating' }
       end
