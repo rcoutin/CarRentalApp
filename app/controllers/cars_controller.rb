@@ -11,7 +11,7 @@ class CarsController < ApplicationController
 
      # @cars = Reservation.joins("RIGHT JOIN 'cars' ON cars.id = reservations.car_id").where.not(:customer_id => current_user).select("cars.*")      
     end
-    #@cars = @cars.search(params[:search])
+    @cars = @cars.search(params[:search])
     
   end
   def show
