@@ -1,19 +1,21 @@
 # CSC 517 Program 2 - OnePlus Car Rental Application
 
-#### Note: Do not use the fake e-mail IDs during signup
-The application requires you to make use of legitimate e-mails IDs (and not fake email IDs) for **best experience**. As we are using e-mails for notifications, kindly use your personal e-mail IDs to test the application.
+#### Note: Do not use fake e-mail IDs during signup
+The application requires you to make use of legitimate e-mails IDs (and not fake email IDs). As we are using e-mails for notifications, kindly use your personal e-mail IDs to test the application.
 
-### LINK: https://one-plus-car-rental.herokuapp.com/
+### Link: https://one-plus-car-rental.herokuapp.com/
+
+Note: Clicking on OnePlus Car Rentals (top left) at any point of time will take you back to the homepage.
 ## Credentials
 
 ##### SuperAdmins
-Only one superadmin has been created during deployment. To login, the superadmin should use the admins login option which can be found on the homepage.
+Only one Superadmin has been created during deployment. To login, the Superadmin should use the admins login button which can be found on the application homepage.
 ```
 e-mail: jsmith@example.com  
 password: a  
 ```
 ##### Admins
-To create new admin/superadmin, a admin/superadmin has to click on the "Manage Admins" link provided on his homepage after logging in.   
+To create new admin/superadmin, a(n) admin/superadmin has to click on the "Manage Admins" link provided on his homepage after logging in.   
 ##### Customers
 A customer can use the sign up option and create an account. The customer will then get a _**welcome e-mail**_ in the e-mail that he/she used to register.
 ## Problem Statement
